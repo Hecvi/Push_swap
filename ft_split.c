@@ -45,7 +45,7 @@ int     c_l(char *s, int i)
     return (count);
 }
 
-int     free_char(char **s, int j)
+int     free_char(char **s, int j, int flag)
 {
     j--;
     while (j >= 0)
@@ -56,7 +56,8 @@ int     free_char(char **s, int j)
     }
     free(s);
     s = NULL;
-    write(1, "Memory allocation error\n", 24);
+    if (1 == flag)
+        write(1, "Memory allocation error\n", 24);
     return (1);
 }
 
@@ -70,7 +71,7 @@ char    **mas_of_char(char *str, char **s, int i)
     {
         k = 0;
         if (!(s[j] = (char *)malloc(sizeof(char) * (c_l(str, i) + 1))))
-            exit(free_char(s, j));
+            exit(free_char(s, j, 1));
         while (check_char(str[i], 3))
         {
             s[j][k] = str[i];

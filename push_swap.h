@@ -12,8 +12,6 @@
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
-# define INT_MIN -2147483648
-# define INT_MAX 2147483647
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -27,7 +25,7 @@ typedef struct      s_ps
 
 int     c_w(char *s);
 int     c_l(char *s, int i);
-int     free_char(char **s, int j);
+int     free_char(char **s, int j, int flag);
 char    **mas_of_char(char *str, char **s, int i);
 char    **ft_split(char *str);
 void    free_list(t_ps **a, int flag);
@@ -37,6 +35,5 @@ void    first_check(char **av);
 int     func_atoi(char *str, int sign, int *indicator);
 int     check_string_of_array(char *s);
 int     second_check(char **av, t_ps **a);
-size_t	ft_strlen(const char *s);
 
 #endif

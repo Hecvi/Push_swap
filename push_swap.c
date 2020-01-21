@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
 void    free_list(t_ps **a, int flag)
 {
@@ -56,8 +55,7 @@ void    create_list(t_ps **a, int i)
 
 int     check_char(char c, int flag)
 {
-    if (1 == flag && ((c >= '0' && c <= '9') || '-' == c || '+' == c ||
-    '\n' == c || '\t' == c || '\v' == c || '\f' == c || '\r' == c || ' ' == c))
+    if (1 == flag && ((c >= '0' && c <= '9') || '-' == c || '+' == c || '\n' == c || '\t' == c || '\v' == c || '\f' == c || '\r' == c || ' ' == c))
         return (1);
     else if (2 == flag && c != '\0' && ('\n' == c || '\t' == c || '\v' == c ||
     '\f' == c || '\r' == c || ' ' == c))
@@ -101,6 +99,7 @@ void     first_check(char **av)
 //       в листы если что-то не так, то фришим все листы и выходим из программы
 //       если ошибка при выделении памяти в одной строке сплита то мы фришим все массивы сплитов. в конце мы фришим
 //       все равно массив сплитов
+//      не работает \n тд
 
 int     func_atoi(char *str, int sign, int *indicator)
 {
@@ -108,18 +107,16 @@ int     func_atoi(char *str, int sign, int *indicator)
     unsigned long long int	number;
 
     i = 0;
-    sign = 1;
     number = 0;
     while (check_char(str[i], 2))
         i++;
-    if (str[i] == '-')
-        sign = -1;
+    sign = str[i] == '-' ? -1 : 1;
     if (str[i] == '-' || str[i] == '+')
         i++;
     while (str[i])
     {
         number = number * 10 + (str[i] - '0');
-        if ((number > INT_MAX) || ((number - 1) * sign < INT_MIN))
+        if ((number > 2147483647 && 1 == sign) || (number > 2147483648 && -1 == sign))
         {
             *indicator = 0;
             return (0);
@@ -173,7 +170,7 @@ int     second_check(char **av, t_ps **a)
         {
             if (!(check_string_of_array(s[j])))
             {
-                free_char(s, c_w(av[i]));
+                free_char(s, c_w(av[i]), 0);
                 free_list(a, 0);
                 write(1, "Incorrect data\n", 15);
                 exit(1);
@@ -184,6 +181,8 @@ int     second_check(char **av, t_ps **a)
     }
     return (1);
 }
+
+#include <stdio.h>
 
 int     main(int ac, char **av)
 {
