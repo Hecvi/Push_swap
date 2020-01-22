@@ -34,6 +34,17 @@ int     check_char(char c, int flag);
 void    first_check(char **av);
 int     func_atoi(char *str, int sign, int *indicator);
 int     check_string_of_array(char *s);
-int     second_check(char **av, t_ps **a);
+void     second_check(char **av, t_ps **a);
+void    sa(t_ps **a);
+void    sb(t_ps **b);
+void    ss(t_ps **a, t_ps **b);
+void    pa(t_ps **a, t_ps **b);
+void    pb(t_ps **b, t_ps **a);
+void    ra(t_ps **a);
+void    rb(t_ps **b);
+void    rr(t_ps **a, t_ps **b);
+void    rra(t_ps **a);
+void    rrb(t_ps **b);
+void    rrr(t_ps **a, t_ps **b);
 
 #endif
