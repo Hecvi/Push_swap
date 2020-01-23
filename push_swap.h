@@ -20,6 +20,7 @@
 typedef struct      s_ps
 {
     int             num;
+    int             index;
     struct s_ps   *next;
 }                   t_ps;
 
@@ -31,6 +32,7 @@ void    rb(t_ps **b);
 void    rra(t_ps **a);
 void    rrb(t_ps **b);
 int     c_l(char *s, int i);
+void    sort_index(t_ps **a);
 void    pa(t_ps **a, t_ps **b);
 void    pb(t_ps **b, t_ps **a);
 void    rr(t_ps **a, t_ps **b);

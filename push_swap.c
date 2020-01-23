@@ -18,33 +18,6 @@ void    rrr(t_ps **a, t_ps **b)
     rrb(b);
 }
 
-void    create_list(t_ps **a, int i, char **s, int words)
-{
-    t_ps *b;
-    t_ps *tmp;
-
-    if (NULL == (*a))
-    {
-        if (!((*a) = (t_ps *)malloc(sizeof(t_ps))))
-        {
-            write(1, "Memory allocation error\n", 24);
-            free_split(s, words, 0);
-            exit(1);
-        }
-        (*a)->num = i;
-        (*a)->next = NULL;
-        return ;
-    }
-    tmp = (*a);
-    while (tmp->next)
-        tmp = tmp->next;
-    if (!(b = (t_ps *)malloc(sizeof(t_ps))))
-        free_all(s, words, a, 1);
-    b->num = i;
-    b->next = NULL;
-    tmp->next = b;
-}
-
 int     func_atoi(char *str, int sign, int *indicator)
 {
     int						i;
@@ -83,10 +56,9 @@ int     main(int ac, char **av)
     a = NULL;
     first_check(av);
     second_check(av, &a, i, j);
-
     while (a)
     {
-        printf("%d\n", (a->num));
+        printf("%d\n", (a->index));
         a = a->next;
     }
     return (0);
