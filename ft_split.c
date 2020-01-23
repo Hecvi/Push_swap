@@ -21,8 +21,7 @@ int     c_w(char *s)
     count = 0;
     while (s[i])
     {
-        if (s[i] != '\n' && s[i] != '\t' && s[i] != '\v' && s[i] != '\f'
-            && s[i] != '\r' && s[i] != ' ' && (' ' == s[i + 1] ||
+        if (check_char(s[i], 3) && (' ' == s[i + 1] ||
             '\t' == s[i + 1] || '\n' == s[i + 1] || '\v' == s[i + 1] ||
             '\f' == s[i + 1] || '\r' == s[i + 1] || '\0' == s[i + 1]))
             count++;
@@ -36,8 +35,7 @@ int     c_l(char *s, int i)
     int count;
 
     count = 0;
-    while (s[i] != '\n' && s[i] != '\t' && s[i] != '\v' && s[i] != '\f'
-           && s[i] != '\r' && s[i] != ' ' && s[i])
+    while (check_char(s[i], 3))
     {
         count++;
         i++;
@@ -45,45 +43,26 @@ int     c_l(char *s, int i)
     return (count);
 }
 
-int     free_char(char **s, int j, int flag)
-{
-    j--;
-    while (j >= 0)
-    {
-        free(s[j]);
-        s[j] = NULL;
-        j--;
-    }
-    free(s);
-    s = NULL;
-    if (1 == flag)
-        write(1, "Memory allocation error\n", 24);
-    return (1);
-}
-
-char    **mas_of_char(char *str, char **s, int i)
+char    **mas_of_char(char *str, char **s, t_ps **a, int i, int j)
 {
     int k;
-    int j;
 
-    j = 0;
     while (str[i])
     {
-        k = 0;
-        if (!(s[j] = (char *)malloc(sizeof(char) * (c_l(str, i) + 1))))
-            exit(free_char(s, j, 1));
-        while (check_char(str[i], 3))
+        if (check_char(str[i], 3))
         {
-            s[j][k] = str[i];
-            i++;
-            k++;
-        }
-        s[j][k] = '\0';
-        j++;
-        if (!str[i])
-        {
-            s[j] = NULL;
-            return (s);
+            k = 0;
+            if (!(s[j] = (char *)malloc(sizeof(char) * (c_l(str, i) + 1))))
+                free_all(s, j, a, 1);
+            while (check_char(str[i], 3))
+                s[j][k++] = str[i++];
+            s[j][k] = '\0';
+            j++;
+            if (str[i] == '\0')
+            {
+                s[j] = NULL;
+                return (s);
+            }
         }
         i++;
     }
@@ -95,7 +74,6 @@ char    **ft_split(char *str, t_ps **a)
 {
     int i;
     int j;
-    int k;
     char **s;
 
     i = 0;
@@ -109,33 +87,5 @@ char    **ft_split(char *str, t_ps **a)
     }
     while (check_char(str[i], 2))
         i++;
-    while (str[i])
-    {
-        if (check_char(str[i], 3))
-        {
-            k = 0;
-            if (!(s[j] = (char *) malloc(sizeof(char) * (c_l(str, i) + 1))))
-            {
-                free_char(s, j, 1);
-                free_list(a, 0);
-                exit(1);
-            }
-            while (check_char(str[i], 3))
-            {
-                s[j][k] = str[i];
-                i++;
-                k++;
-            }
-            s[j][k] = '\0';
-            j++;
-            if (str[i] == '\0')
-            {
-                s[j] = NULL;
-                return (s);
-            }
-        }
-        i++;
-    }
-    s[j] = NULL;
-    return (s);
+    return (mas_of_char(str, s, a, i, j));
 }

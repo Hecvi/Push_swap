@@ -12,22 +12,13 @@
 
 #include "push_swap.h"
 
-void    free_list(t_ps **a, int flag)
+void    rrr(t_ps **a, t_ps **b)
 {
-    t_ps *tmp;
-
-    tmp = (*a);
-    while (*a)
-    {
-        (*a) = (*a)->next;
-        free(tmp);
-        tmp = (*a);
-    }
-    if (1 == flag)
-        write(1, "Memory allocation error\n", 24);
+    rra(a);
+    rrb(b);
 }
 
-void    create_list(t_ps **a, int i, char *s)
+void    create_list(t_ps **a, int i, char **s, int words)
 {
     t_ps *b;
     t_ps *tmp;
@@ -37,7 +28,7 @@ void    create_list(t_ps **a, int i, char *s)
         if (!((*a) = (t_ps *)malloc(sizeof(t_ps))))
         {
             write(1, "Memory allocation error\n", 24);
-            free_char(&s, c_w(s), 0);
+            free_split(s, words, 0);
             exit(1);
         }
         (*a)->num = i;
@@ -48,21 +39,35 @@ void    create_list(t_ps **a, int i, char *s)
     while (tmp->next)
         tmp = tmp->next;
     if (!(b = (t_ps *)malloc(sizeof(t_ps))))
-    {
-        free_char(&s, c_w(s), 0);
-        return (free_list(a, 1));  ///только кусок тут и все
-    }
+        free_all(s, words, a, 1);
     b->num = i;
     b->next = NULL;
     tmp->next = b;
 }
 
-
-
-void    rrr(t_ps **a, t_ps **b)
+int     func_atoi(char *str, int sign, int *indicator)
 {
-    rra(a);
-    rrb(b);
+    int						i;
+    unsigned long long int	number;
+
+    i = 0;
+    number = 0;
+    while (check_char(str[i], 2))
+        i++;
+    sign = str[i] == '-' ? -1 : 1;
+    if (str[i] == '-' || str[i] == '+')
+        i++;
+    while (str[i])
+    {
+        number = number * 10 + (str[i] - '0');
+        if ((number > 2147483647 && 1 == sign) || (number > 2147483648 && -1 == sign))
+        {
+            *indicator = -1;
+            return (0);
+        }
+        i++;
+    }
+    return ((int)number * sign);
 }
 
 #include <stdio.h>
@@ -71,9 +76,7 @@ int     main(int ac, char **av)
 {
     int i;
     int j;
-    char **s;
     t_ps  *a;
-    t_ps  *b;
 
     i = 0;
     j = 0;

@@ -53,31 +53,6 @@ void     first_check(char **av)
     }
 }
 
-int     func_atoi(char *str, int sign, int *indicator)
-{
-    int						i;
-    unsigned long long int	number;
-
-    i = 0;
-    number = 0;
-    while (check_char(str[i], 2))
-        i++;
-    sign = str[i] == '-' ? -1 : 1;
-    if (str[i] == '-' || str[i] == '+')
-        i++;
-    while (str[i])
-    {
-        number = number * 10 + (str[i] - '0');
-        if ((number > 2147483647 && 1 == sign) || (number > 2147483648 && -1 == sign))
-        {
-            *indicator = -1;
-            return (0);
-        }
-        i++;
-    }
-    return ((int)number * sign);
-}
-
 int     check_string_of_array(char *s, int *indicator)
 {
     int     i;
@@ -124,6 +99,7 @@ void    second_check(char **av, t_ps **a, int i, int j)
     char **s;
     int number;
     int *indicator;
+    int num_of_words;
 
     indicator = &i;
     while (av[++i])
@@ -131,19 +107,15 @@ void    second_check(char **av, t_ps **a, int i, int j)
         j = 0;
         if (!(s = ft_split(av[i], a)))
             continue ;
+        num_of_words = c_w(av[i]);
         while (s[j])
         {
             number = check_string_of_array(s[j], indicator);
-            if (-1 == *indicator)
-            {
-                free_char(s, c_w(av[i]), 0);
-                free_list(a, 0);
-                write(1, "Incorrect data\n", 15);
-                exit(1);
-            }
-            create_list(a, number, av[i]); //вставить функцию перед этой???
+            if (-1 == *indicator || !(check_number(a, number)))
+                free_all(s, num_of_words, a, 0);
+            create_list(a, number, s, num_of_words);
             j++;
         }
-        free_char(s, c_w(av[i]), 0);
+        free_split(s, c_w(av[i]), 0);
     }
 }
