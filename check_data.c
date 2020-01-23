@@ -53,25 +53,40 @@ void     first_check(char **av)
     }
 }
 
-int     invalid_data(void)
+int     func_atoi(char *str, int sign, int *indicator)
 {
-    free_char(s, c_w(av[i]), 0);
-    free_list(a, 0);
-    write(1, "Incorrect data\n", 15);
-    exit(1);
+    int						i;
+    unsigned long long int	number;
+
+    i = 0;
+    number = 0;
+    while (check_char(str[i], 2))
+        i++;
+    sign = str[i] == '-' ? -1 : 1;
+    if (str[i] == '-' || str[i] == '+')
+        i++;
+    while (str[i])
+    {
+        number = number * 10 + (str[i] - '0');
+        if ((number > 2147483647 && 1 == sign) || (number > 2147483648 && -1 == sign))
+        {
+            *indicator = -1;
+            return (0);
+        }
+        i++;
+    }
+    return ((int)number * sign);
 }
 
-int     check_string_of_array(char *s)
+int     check_string_of_array(char *s, int *indicator)
 {
     int     i;
     size_t  j;
     int     sign;
     int     number;
-    int     *indicator;
 
     i = -1;
     sign = 1;
-    indicator = &sign;
     if ('-' == s[0] || '+' == s[0])
     {
         sign = -1;
@@ -79,41 +94,56 @@ int     check_string_of_array(char *s)
     }
     j = ft_strlen(s);
     if ((j > 10 && 1 == sign) || (j > 11 && -1 == sign))
-        return (invalid_data());
+    {
+        *indicator = -1;
+        return (0);
+    }
     while (s[++i])
         if (!(s[i] >= '0' && s[i] <= '9'))
-            return (invalid_data());
+            return (0);
     number = func_atoi(s, sign, indicator);
-    if (0 == *indicator)
-        return (invalid_data());
     return (number);
 }
 
-void     second_check(char **av, t_ps **a)
+int    check_number(t_ps **a, int number)
 {
-    int i;
-    int j;
+    t_ps *tmp;
+
+    tmp = (*a);
+    while (tmp)
+    {
+        if ((tmp)->num == number)
+            return (0);
+        (tmp) = (tmp)->next;
+    }
+    return (1);
+}
+
+void    second_check(char **av, t_ps **a, int i, int j)
+{
     char **s;
     int number;
+    int *indicator;
 
-    i = 0;
+    indicator = &i;
     while (av[++i])
     {
         j = 0;
-        if (!(s = ft_split(av[i])))
+        if (!(s = ft_split(av[i], a)))
             continue ;
         while (s[j])
         {
-            number = check_string_of_array(s[j]);
-            if (!(number))
+            number = check_string_of_array(s[j], indicator);
+            if (-1 == *indicator)
             {
                 free_char(s, c_w(av[i]), 0);
                 free_list(a, 0);
                 write(1, "Incorrect data\n", 15);
                 exit(1);
             }
-            create_list(a, number);
+            create_list(a, number, av[i]); //вставить функцию перед этой???
             j++;
         }
+        free_char(s, c_w(av[i]), 0);
     }
 }

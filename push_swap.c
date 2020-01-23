@@ -27,7 +27,7 @@ void    free_list(t_ps **a, int flag)
         write(1, "Memory allocation error\n", 24);
 }
 
-void    create_list(t_ps **a, int i)
+void    create_list(t_ps **a, int i, char *s)
 {
     t_ps *b;
     t_ps *tmp;
@@ -37,6 +37,7 @@ void    create_list(t_ps **a, int i)
         if (!((*a) = (t_ps *)malloc(sizeof(t_ps))))
         {
             write(1, "Memory allocation error\n", 24);
+            free_char(&s, c_w(s), 0);
             exit(1);
         }
         (*a)->num = i;
@@ -47,36 +48,16 @@ void    create_list(t_ps **a, int i)
     while (tmp->next)
         tmp = tmp->next;
     if (!(b = (t_ps *)malloc(sizeof(t_ps))))
-        return (free_list(a, 1));
+    {
+        free_char(&s, c_w(s), 0);
+        return (free_list(a, 1));  ///только кусок тут и все
+    }
     b->num = i;
     b->next = NULL;
     tmp->next = b;
 }
 
-int     func_atoi(char *str, int sign, int *indicator)
-{
-    int						i;
-    unsigned long long int	number;
 
-    i = 0;
-    number = 0;
-    while (check_char(str[i], 2))
-        i++;
-    sign = str[i] == '-' ? -1 : 1;
-    if (str[i] == '-' || str[i] == '+')
-        i++;
-    while (str[i])
-    {
-        number = number * 10 + (str[i] - '0');
-        if ((number > 2147483647 && 1 == sign) || (number > 2147483648 && -1 == sign))
-        {
-            *indicator = 0;
-            return (0);
-        }
-        i++;
-    }
-    return ((int)number * sign);
-}
 
 void    rrr(t_ps **a, t_ps **b)
 {
@@ -89,21 +70,21 @@ void    rrr(t_ps **a, t_ps **b)
 int     main(int ac, char **av)
 {
     int i;
-    int     j;
+    int j;
+    char **s;
     t_ps  *a;
     t_ps  *b;
 
+    i = 0;
+    j = 0;
     a = NULL;
     first_check(av);
-    second_check(av, &a);
+    second_check(av, &a, i, j);
 
-    j = 0;
-    i = 8;
-    while (j < i)
+    while (a)
     {
         printf("%d\n", (a->num));
         a = a->next;
-        j++;
     }
     return (0);
 }

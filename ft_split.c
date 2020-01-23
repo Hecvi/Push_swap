@@ -91,18 +91,51 @@ char    **mas_of_char(char *str, char **s, int i)
     return (s);
 }
 
-char    **ft_split(char *str)
+char    **ft_split(char *str, t_ps **a)
 {
-    int     i;
-    char    **s;
+    int i;
+    int j;
+    int k;
+    char **s;
 
     i = 0;
+    j = 0;
+    if (!str)
+        return (NULL);
     if (!(s = (char **)malloc(sizeof(char *) * (c_w(str) + 1))))
     {
-        write(1, "Memory allocation error\n", 24);
-        return (NULL);
+        free_list(a, 1);
+        exit(1);
     }
     while (check_char(str[i], 2))
         i++;
-    return (mas_of_char(str, s, i));
+    while (str[i])
+    {
+        if (check_char(str[i], 3))
+        {
+            k = 0;
+            if (!(s[j] = (char *) malloc(sizeof(char) * (c_l(str, i) + 1))))
+            {
+                free_char(s, j, 1);
+                free_list(a, 0);
+                exit(1);
+            }
+            while (check_char(str[i], 3))
+            {
+                s[j][k] = str[i];
+                i++;
+                k++;
+            }
+            s[j][k] = '\0';
+            j++;
+            if (str[i] == '\0')
+            {
+                s[j] = NULL;
+                return (s);
+            }
+        }
+        i++;
+    }
+    s[j] = NULL;
+    return (s);
 }
