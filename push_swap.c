@@ -33,7 +33,7 @@ int     func_atoi(char *str, int sign, int *indicator)
     while (str[i])
     {
         number = number * 10 + (str[i] - '0');
-        if ((number > 2147483647 && 1 == sign) || (number > 2147483648 && -1 == sign))
+        if ((number > MAX && 1 == sign) || (number > MIN && -1 == sign))
         {
             *indicator = -1;
             return (0);
@@ -56,6 +56,7 @@ int     main(int ac, char **av)
     a = NULL;
     first_check(av);
     second_check(av, &a, i, j);
+    sort_by_index(&a);
     while (a)
     {
         printf("%d\n", (a->index));

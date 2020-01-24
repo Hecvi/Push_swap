@@ -12,24 +12,29 @@
 
 #include "push_swap.h"
 
-void    sort_index(t_ps **a)
+void    sort_by_index(t_ps **a)
 {
     t_ps *tmp;
-    int min;
+    t_ps *min;
+    int count;
+    int  minimum;
 
-    min = (*a)->num;
-    while (tmp)
+    count = 1;
+    while (!(index))
     {
         tmp = (*a);
+        minimum = MAX;
         while (tmp)
         {
-            if (tmp->num < min)
-                min
-
-
-
+            if (tmp->num < minimum && !index)
+            {
+                minimum = tmp->num;
+                min = tmp;
+            }
+            tmp = tmp->next;
         }
-
+        min->index = count;
+        count++;
     }
 }
 

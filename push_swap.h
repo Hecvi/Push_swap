@@ -15,6 +15,8 @@
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
+# define MAX 2147483647
+# define MIN 2147483648
 # include "libft/libft.h"
 
 typedef struct      s_ps
@@ -32,13 +34,13 @@ void    rb(t_ps **b);
 void    rra(t_ps **a);
 void    rrb(t_ps **b);
 int     c_l(char *s, int i);
-void    sort_index(t_ps **a);
 void    pa(t_ps **a, t_ps **b);
 void    pb(t_ps **b, t_ps **a);
 void    rr(t_ps **a, t_ps **b);
 void    ss(t_ps **a, t_ps **b);
-void    rrr(t_ps **a, t_ps **b);
 void    first_check(char **av);
+void    rrr(t_ps **a, t_ps **b);
+void    sort_by_index(t_ps **a);
 int     check_char(char c, int flag);
 void    free_list(t_ps **a, int flag);
 char    **ft_split(char *str, t_ps **a);
