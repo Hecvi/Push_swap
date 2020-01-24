@@ -12,10 +12,11 @@
 
 #include "push_swap.h"
 
-void    rrr(t_ps **a, t_ps **b)
+char    *rrr(t_ps **a, t_ps **b)
 {
     rra(a);
     rrb(b);
+    return ("rrr");
 }
 
 int     func_atoi(char *str, int sign, int *indicator)
@@ -50,13 +51,16 @@ int     main(int ac, char **av)
     int i;
     int j;
     t_ps  *a;
+    int count;
 
     i = 0;
     j = 0;
     a = NULL;
+    count = 1;
     first_check(av);
     second_check(av, &a, i, j);
-    sort_by_index(&a);
+    sort_by_index(&a, count);
+    general_function(&a);
     while (a)
     {
         printf("%d\n", (a->index));

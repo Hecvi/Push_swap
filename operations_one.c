@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void    sa(t_ps **a)
+char    *sa(t_ps **a)
 {
     t_ps *l;
 
@@ -23,9 +23,10 @@ void    sa(t_ps **a)
         l->next = (*a);
         (*a) = l;
     }
+    return ("sa");
 }
 
-void    pa(t_ps **a, t_ps **b)
+char   *pa(t_ps **a, t_ps **b)
 {
     t_ps *l;
 
@@ -36,9 +37,10 @@ void    pa(t_ps **a, t_ps **b)
         (*a) = (*b);
         (*b) = l;
     }
+    return ("pa");
 }
 
-void    ra(t_ps **a)
+char    *ra(t_ps **a)
 {
     t_ps *l;
     t_ps *tmp;
@@ -46,7 +48,7 @@ void    ra(t_ps **a)
     if (*a)
     {
         if (!((*a)->next))
-            return ;
+            return (NULL);
         l = (*a);
         tmp = (*a)->next;
         while(l->next)
@@ -55,15 +57,17 @@ void    ra(t_ps **a)
         (*a)->next = NULL;
         (*a) = tmp;
     }
+    return ("ra");
 }
 
-void    rr(t_ps **a, t_ps **b)
+char    *rr(t_ps **a, t_ps **b)
 {
     ra(a);
     rb(b);
+    return ("rr");
 }
 
-void    rra(t_ps **a)
+char    *rra(t_ps **a)
 {
     t_ps *l;
     t_ps *tmp;
@@ -71,7 +75,7 @@ void    rra(t_ps **a)
     if (*a)
     {
         if (!((*a)->next))
-            return ;
+            return (NULL);
         l = (*a);
         while(l->next->next)
             l = l->next;
@@ -80,4 +84,5 @@ void    rra(t_ps **a)
         tmp->next = (*a);
         (*a) = tmp;
     }
+    return ("rra");
 }

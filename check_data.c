@@ -113,7 +113,7 @@ void    second_check(char **av, t_ps **a, int i, int j)
             number = check_string_of_array(s[j], indicator);
             if (-1 == *indicator || !(check_number(a, number)))
                 free_all(s, num_of_words, a, 0);
-            create_list(a, number, s, num_of_words);
+            create_list_a(a, number, s, num_of_words);
             j++;
         }
         free_split(s, c_w(av[i]), 0);

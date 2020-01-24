@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void    sb(t_ps **b)
+char    *sb(t_ps **b)
 {
     t_ps *l;
 
@@ -23,9 +23,10 @@ void    sb(t_ps **b)
         l->next = (*b);
         (*b) = l;
     }
+    return ("sb");
 }
 
-void    pb(t_ps **b, t_ps **a)
+char    *pb(t_ps **b, t_ps **a)
 {
     t_ps *l;
 
@@ -36,9 +37,10 @@ void    pb(t_ps **b, t_ps **a)
         (*b) = (*a);
         (*a) = l;
     }
+    return ("pb");
 }
 
-void    rb(t_ps **b)
+char    *rb(t_ps **b)
 {
     t_ps *l;
     t_ps *tmp;
@@ -46,7 +48,7 @@ void    rb(t_ps **b)
     if (*b)
     {
         if (!((*b)->next))
-            return ;
+            return (NULL);
         l = (*b);
         tmp = (*b)->next;
         while(l->next)
@@ -55,9 +57,10 @@ void    rb(t_ps **b)
         (*b)->next = NULL;
         (*b) = tmp;
     }
+    return ("rb");
 }
 
-void    rrb(t_ps **b)
+char    *rrb(t_ps **b)
 {
     t_ps *l;
     t_ps *tmp;
@@ -65,7 +68,7 @@ void    rrb(t_ps **b)
     if (*b)
     {
         if (!((*b)->next))
-            return ;
+            return (NULL);
         l = (*b);
         while(l->next->next)
             l = l->next;
@@ -74,10 +77,12 @@ void    rrb(t_ps **b)
         tmp->next = (*b);
         (*b) = tmp;
     }
+    return ("rrb");
 }
 
-void    ss(t_ps **a, t_ps **b)
+char    *ss(t_ps **a, t_ps **b)
 {
     sa(a);
     sb(b);
+    return ("ss");
 }

@@ -12,37 +12,51 @@
 
 #include "push_swap.h"
 
-void    sort_by_index(t_ps **a)
+void    sort_by_index(t_ps **a, int count)
 {
     t_ps *tmp;
     t_ps *min;
-    int count;
     int  minimum;
 
-    count = 1;
-    while (!(index))
+    tmp = (*a);
+    minimum = MAX;
+    while (tmp)
     {
-        tmp = (*a);
-        minimum = MAX;
-        while (tmp)
+        if (tmp->num <= minimum && !(tmp->index))
         {
-            if (tmp->num < minimum && !index)
-            {
-                minimum = tmp->num;
-                min = tmp;
-            }
-            tmp = tmp->next;
+            minimum = tmp->num;
+            min = tmp;
         }
-        min->index = count;
-        count++;
+        tmp = tmp->next;
+    }
+    min->index = count;
+    tmp = (*a);
+    while (tmp)
+    {
+        if (!(tmp->index))
+            sort_by_index(a, ++count);
+        tmp = tmp->next;
     }
 }
 
-void    create_list(t_ps **a, int i, char **s, int words)
+void    filling_in_lists(t_ps **a, int i, char **s, int words)
 {
     t_ps *b;
     t_ps *tmp;
 
+    tmp = (*a);
+    while (tmp->next)
+        tmp = tmp->next;
+    if (!(b = (t_ps *)malloc(sizeof(t_ps))))
+        free_all(s, words, a, 1);
+    b->num = i;
+    b->index = 0;
+    b->next = NULL;
+    tmp->next = b;
+}
+
+void    create_list_a(t_ps **a, int i, char **s, int words)
+{
     if (NULL == (*a))
     {
         if (!((*a) = (t_ps *)malloc(sizeof(t_ps))))
@@ -56,13 +70,5 @@ void    create_list(t_ps **a, int i, char **s, int words)
         (*a)->next = NULL;
         return ;
     }
-    tmp = (*a);
-    while (tmp->next)
-        tmp = tmp->next;
-    if (!(b = (t_ps *)malloc(sizeof(t_ps))))
-        free_all(s, words, a, 1);
-    b->num = i;
-    b->index = 0;
-    b->next = NULL;
-    tmp->next = b;
+    filling_in_lists(a, i, s, words);
 }
