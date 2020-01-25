@@ -50,6 +50,7 @@ void    filling_in_lists(t_ps **a, int i, char **s, int words)
     if (!(b = (t_ps *)malloc(sizeof(t_ps))))
         free_all(s, words, a, 1);
     b->num = i;
+    b->flag = 0;
     b->index = 0;
     b->next = NULL;
     tmp->next = b;
@@ -66,6 +67,7 @@ void    create_list_a(t_ps **a, int i, char **s, int words)
             exit(1);
         }
         (*a)->num = i;
+        (*a)->flag = 0;
         (*a)->index = 0;
         (*a)->next = NULL;
         return ;

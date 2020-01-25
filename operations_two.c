@@ -22,8 +22,9 @@ char    *sb(t_ps **b)
         (*b)->next = l->next;
         l->next = (*b);
         (*b) = l;
+        return ("sb");
     }
-    return ("sb");
+    return (NULL);
 }
 
 char    *pb(t_ps **b, t_ps **a)
@@ -36,8 +37,9 @@ char    *pb(t_ps **b, t_ps **a)
         (*a)->next = (*b);
         (*b) = (*a);
         (*a) = l;
+        return ("pb");
     }
-    return ("pb");
+    return (NULL);
 }
 
 char    *rb(t_ps **b)
@@ -45,19 +47,18 @@ char    *rb(t_ps **b)
     t_ps *l;
     t_ps *tmp;
 
-    if (*b)
+    if ((*b) && (*b)->next)
     {
-        if (!((*b)->next))
-            return (NULL);
         l = (*b);
         tmp = (*b)->next;
-        while(l->next)
+        while (l->next)
             l = l->next;
         l->next = (*b);
         (*b)->next = NULL;
         (*b) = tmp;
+        return ("rb");
     }
-    return ("rb");
+    return (NULL);
 }
 
 char    *rrb(t_ps **b)
@@ -82,7 +83,11 @@ char    *rrb(t_ps **b)
 
 char    *ss(t_ps **a, t_ps **b)
 {
-    sa(a);
-    sb(b);
-    return ("ss");
+    if ((*a) && (*a)->next && (*b) && (*b)->next)
+    {
+        sa(a);
+        sb(b);
+        return ("ss");
+    }
+    return (NULL);
 }

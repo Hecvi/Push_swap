@@ -22,8 +22,9 @@ char    *sa(t_ps **a)
         (*a)->next = l->next;
         l->next = (*a);
         (*a) = l;
+        return ("sa");
     }
-    return ("sa");
+    return (NULL);
 }
 
 char   *pa(t_ps **a, t_ps **b)
@@ -36,8 +37,9 @@ char   *pa(t_ps **a, t_ps **b)
         (*b)->next = (*a);
         (*a) = (*b);
         (*b) = l;
+        return ("pa");
     }
-    return ("pa");
+    return (NULL);
 }
 
 char    *ra(t_ps **a)
@@ -62,6 +64,7 @@ char    *ra(t_ps **a)
 
 char    *rr(t_ps **a, t_ps **b)
 {
+    if ((*a) && (*b))
     ra(a);
     rb(b);
     return ("rr");

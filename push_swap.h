@@ -23,6 +23,7 @@ typedef struct      s_ps
 {
     int             num;
     int             index;
+    int             flag;
     struct s_ps   *next;
 }                   t_ps;
 
@@ -33,6 +34,7 @@ char    *ra(t_ps **a);
 char    *rb(t_ps **b);
 char    *rra(t_ps **a);
 char    *rrb(t_ps **b);
+int     find_max(t_ps **a);
 int     c_l(char *s, int i);
 void    first_check(char **av);
 char    *pa(t_ps **a, t_ps **b);
@@ -40,9 +42,9 @@ char    *pb(t_ps **b, t_ps **a);
 char    *rr(t_ps **a, t_ps **b);
 char    *ss(t_ps **a, t_ps **b);
 char    *rrr(t_ps **a, t_ps **b);
-void    general_function(t_ps **a);
 int     check_char(char c, int flag);
 void    free_list(t_ps **a, int flag);
+int     check_order_in_stack(t_ps **a);
 char    **ft_split(char *str, t_ps **a);
 int     check_number(t_ps **a, int number);
 void    sort_by_index(t_ps **a, int count);

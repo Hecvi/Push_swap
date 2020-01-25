@@ -52,6 +52,8 @@ int     main(int ac, char **av)
     int j;
     t_ps  *a;
     int count;
+    int b;
+
 
     i = 0;
     j = 0;
@@ -60,12 +62,13 @@ int     main(int ac, char **av)
     first_check(av);
     second_check(av, &a, i, j);
     sort_by_index(&a, count);
-    general_function(&a);
-    while (a)
-    {
-        printf("%d\n", (a->index));
-        a = a->next;
-    }
+    b = fcheck_order_in_stack(&a);
+    printf("%d\n", b);
+//    while (a)
+//    {
+//        printf("%d\n", (a->flag));
+//        a = a->next;
+//    }
     return (0);
 }
 
