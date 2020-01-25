@@ -27,37 +27,43 @@ typedef struct      s_ps
     struct s_ps   *next;
 }                   t_ps;
 
+typedef struct      s_operations
+{
+    char                    *str;
+    struct s_operations     *next;
+}                   t_operations;
+
 int     c_w(char *s);
-char    *sa(t_ps **a);
-char    *sb(t_ps **b);
-char    *ra(t_ps **a);
-char    *rb(t_ps **b);
-char    *rra(t_ps **a);
-char    *rrb(t_ps **b);
 int     find_max(t_ps **a);
 int     c_l(char *s, int i);
 void    first_check(char **av);
-char    *pa(t_ps **a, t_ps **b);
-char    *pb(t_ps **b, t_ps **a);
-char    *rr(t_ps **a, t_ps **b);
-char    *ss(t_ps **a, t_ps **b);
-char    *rrr(t_ps **a, t_ps **b);
 int     check_char(char c, int flag);
 void    free_list(t_ps **a, int flag);
 int     check_order_in_stack(t_ps **a);
 char    **ft_split(char *str, t_ps **a);
+void    general_sort(t_ps **a, t_ps **b);
 int     check_number(t_ps **a, int number);
 void    sort_by_index(t_ps **a, int count);
 void    free_split(char **s, int words, int flag);
 int     func_atoi(char *str, int sign, int *indicator);
 int     check_string_of_array(char *s, int *indicator);
 void    second_check(char **av, t_ps **a, int i, int j);
+void    free_list_operations(t_operations **operations);
+void    pa(t_ps **b, t_ps **a, t_operations **operations);
+void    pb(t_ps **a, t_ps **b, t_operations **operations);
+void    rr(t_ps **a, t_ps **b, t_operations **operations);
+void    ss(t_ps **a, t_ps **b, t_operations **operations);
 void    free_all(char **s, int words, t_ps **a, int flag);
+void    sa(t_ps **a, t_ps **b, t_operations **operations);
+void    sb(t_ps **b, t_ps **a, t_operations **operations);
+void    ra(t_ps **a, t_ps **b, t_operations **operations);
+void    rb(t_ps **b, t_ps **a, t_operations **operations);
+void    rra(t_ps **a, t_ps **b, t_operations **operations);
+void    rrb(t_ps **b, t_ps **a, t_operations **operations);
+void    rrr(t_ps **a, t_ps **b, t_operations **operations);
 void    create_list_a(t_ps **a, int i, char **s, int words);
 void    filling_in_lists(t_ps **a, int i, char **s, int words);
 char    **mas_of_char(char *str, char **s, t_ps **a, int i, int j);
-
-
-
+void    create_list_operations(t_operations **operations, t_ps **a, t_ps **b, char *s);
 
 #endif

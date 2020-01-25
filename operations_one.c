@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-char    *sa(t_ps **a)
+void sa(t_ps **a, t_ps **b, t_operations **operations)
 {
     t_ps *l;
 
@@ -22,12 +22,11 @@ char    *sa(t_ps **a)
         (*a)->next = l->next;
         l->next = (*a);
         (*a) = l;
-        return ("sa");
+        create_list_operations(operations, a, b, "sa");
     }
-    return (NULL);
 }
 
-char   *pa(t_ps **a, t_ps **b)
+void    pa(t_ps **b, t_ps **a, t_operations **operations)
 {
     t_ps *l;
 
@@ -37,12 +36,11 @@ char   *pa(t_ps **a, t_ps **b)
         (*b)->next = (*a);
         (*a) = (*b);
         (*b) = l;
-        return ("pa");
+        create_list_operations(operations, a, b, "pa");
     }
-    return (NULL);
 }
 
-char    *ra(t_ps **a)
+void    ra(t_ps **a, t_ps **b, t_operations **operations)
 {
     t_ps *l;
     t_ps *tmp;
@@ -51,28 +49,26 @@ char    *ra(t_ps **a)
     {
         l = (*a);
         tmp = (*a)->next;
-        while(l->next)
+        while (l->next)
             l = l->next;
         l->next = (*a);
         (*a)->next = NULL;
         (*a) = tmp;
-        return ("ra");
+        create_list_operations(operations, a, b, "ra");
     }
-   return (NULL);
 }
 
-char    *rr(t_ps **a, t_ps **b)
+void    rr(t_ps **a, t_ps **b, t_operations **operations)
 {
     if ((*a) && (*a)->next && (*b) && (*b)->next)
     {
-        ra(a);
-        rb(b);
-        return ("rr");
+        ra(a, b, operations);
+        rb(b, a, operations);
+        create_list_operations(operations, a, b, "rr");
     }
-    return (NULL);
 }
 
-char    *rra(t_ps **a)
+void    rra(t_ps **a, t_ps **b, t_operations **operations)
 {
     t_ps *l;
     t_ps *tmp;
@@ -86,7 +82,6 @@ char    *rra(t_ps **a)
         l->next = NULL;
         tmp->next = (*a);
         (*a) = tmp;
-        return ("rra");
+        create_list_operations(operations, a, b, "rra");
     }
-    return (NULL);
 }

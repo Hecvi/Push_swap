@@ -54,3 +54,16 @@ void    free_list(t_ps **a, int flag)
     if (1 == flag)
         write(1, "Memory allocation error\n", 24);
 }
+
+void    free_list_operations(t_operations **operations)
+{
+    t_operations *tmp;
+
+    tmp = (*operations);
+    while (*operations)
+    {
+        (*operations) = (*operations)->next;
+        free(tmp);
+        tmp = (*operations);
+    }
+}

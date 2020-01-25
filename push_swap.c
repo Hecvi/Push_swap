@@ -12,15 +12,14 @@
 
 #include "push_swap.h"
 
-char    *rrr(t_ps **a, t_ps **b)
+void    rrr(t_ps **a, t_ps **b, t_operations **operations)
 {
     if ((*a) && (*a)->next && (*b) && (*b)->next)
     {
-        rra(a);
-        rrb(b);
-        return ("rrr");
+        rra(a, b, operations);
+        rrb(b, a, operations);
+        create_list_operations(operations, a, b, "rrr");
     }
-    return (NULL);
 }
 
 int     func_atoi(char *str, int sign, int *indicator)
@@ -55,24 +54,34 @@ int     main(int ac, char **av)
     int i;
     int j;
     t_ps  *a;
+    t_ps *b;
     int count;
-    int b;
+//    int b;
 
 
     i = 0;
     j = 0;
     a = NULL;
+    b = NULL;
     count = 1;
     first_check(av);
     second_check(av, &a, i, j);
     sort_by_index(&a, count);
-    b = check_order_in_stack(&a);
-    printf("%d\n", b);
-//    while (a)
-//    {
-//        printf("%d\n", (a->flag));
-//        a = a->next;
-//    }
+//    b = check_order_in_stack(&a);
+//    printf("%d\n", b);
+    general_sort(&a, &b);
+    printf("stack A\n");
+    while (a)
+    {
+        printf("%d\n", (a->index));
+        a = a->next;
+    }
+    printf("\nstack B\n");
+    while (b)
+    {
+        printf("%d\n", (b->index));
+        b = b->next;
+    }
     return (0);
 }
 

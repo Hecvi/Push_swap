@@ -19,6 +19,7 @@ int    find_max(t_ps **a)
     int maximum;
 
     tmp = (*a);
+    max = (*a);
     maximum = (*a)->num;
     while (tmp && tmp->flag == (*a)->flag)
     {
@@ -54,6 +55,7 @@ void    sort_by_index(t_ps **a, int count)
     int  minimum;
 
     tmp = (*a);
+    min = (*a);
     minimum = MAX;
     while (tmp)
     {
