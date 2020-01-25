@@ -66,10 +66,8 @@ char    *rrb(t_ps **b)
     t_ps *l;
     t_ps *tmp;
 
-    if (*b)
+    if ((*b) && (*b)->next)
     {
-        if (!((*b)->next))
-            return (NULL);
         l = (*b);
         while(l->next->next)
             l = l->next;
@@ -77,8 +75,9 @@ char    *rrb(t_ps **b)
         l->next = NULL;
         tmp->next = (*b);
         (*b) = tmp;
+        return ("rrb");
     }
-    return ("rrb");
+    return (NULL);
 }
 
 char    *ss(t_ps **a, t_ps **b)

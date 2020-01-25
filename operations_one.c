@@ -47,10 +47,8 @@ char    *ra(t_ps **a)
     t_ps *l;
     t_ps *tmp;
 
-    if (*a)
+    if ((*a) && (*a)->next)
     {
-        if (!((*a)->next))
-            return (NULL);
         l = (*a);
         tmp = (*a)->next;
         while(l->next)
@@ -58,16 +56,20 @@ char    *ra(t_ps **a)
         l->next = (*a);
         (*a)->next = NULL;
         (*a) = tmp;
+        return ("ra");
     }
-    return ("ra");
+   return (NULL);
 }
 
 char    *rr(t_ps **a, t_ps **b)
 {
-    if ((*a) && (*b))
-    ra(a);
-    rb(b);
-    return ("rr");
+    if ((*a) && (*a)->next && (*b) && (*b)->next)
+    {
+        ra(a);
+        rb(b);
+        return ("rr");
+    }
+    return (NULL);
 }
 
 char    *rra(t_ps **a)
@@ -75,10 +77,8 @@ char    *rra(t_ps **a)
     t_ps *l;
     t_ps *tmp;
 
-    if (*a)
+    if ((*a) && (*a)->next)
     {
-        if (!((*a)->next))
-            return (NULL);
         l = (*a);
         while(l->next->next)
             l = l->next;
@@ -86,6 +86,7 @@ char    *rra(t_ps **a)
         l->next = NULL;
         tmp->next = (*a);
         (*a) = tmp;
+        return ("rra");
     }
-    return ("rra");
+    return (NULL);
 }

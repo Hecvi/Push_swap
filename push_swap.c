@@ -14,9 +14,13 @@
 
 char    *rrr(t_ps **a, t_ps **b)
 {
-    rra(a);
-    rrb(b);
-    return ("rrr");
+    if ((*a) && (*a)->next && (*b) && (*b)->next)
+    {
+        rra(a);
+        rrb(b);
+        return ("rrr");
+    }
+    return (NULL);
 }
 
 int     func_atoi(char *str, int sign, int *indicator)
@@ -62,7 +66,7 @@ int     main(int ac, char **av)
     first_check(av);
     second_check(av, &a, i, j);
     sort_by_index(&a, count);
-    b = fcheck_order_in_stack(&a);
+    b = check_order_in_stack(&a);
     printf("%d\n", b);
 //    while (a)
 //    {
