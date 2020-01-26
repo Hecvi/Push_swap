@@ -26,13 +26,13 @@ int     check_char(char c, int flag)
     return (0);
 }
 
-void     first_check(char **av)
+void     first_check(char **av, int ac)
 {
     int i;
     int j;
 
     i = 0;
-    if (!av)
+    if (1 == ac)
     {
         write(1, "Add the arguments\n", 18);
         exit(1);
@@ -118,4 +118,5 @@ void    second_check(char **av, t_ps **a, int i, int j)
         }
         free_split(s, c_w(av[i]), 0);
     }
+    check_list_a(a);
 }

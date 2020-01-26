@@ -64,12 +64,13 @@ int     main(int ac, char **av)
     a = NULL;
     b = NULL;
     count = 1;
-    first_check(av);
+    first_check(av, ac);
     second_check(av, &a, i, j);
     sort_by_index(&a, count);
 //    b = check_order_in_stack(&a);
 //    printf("%d\n", b);
     general_sort(&a, &b);
+
     printf("stack A\n");
     while (a)
     {
@@ -82,6 +83,8 @@ int     main(int ac, char **av)
         printf("%d\n", (b->index));
         b = b->next;
     }
+    //free operations and lists
+
     return (0);
 }
 

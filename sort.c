@@ -15,72 +15,91 @@
 void    general_sort(t_ps **a, t_ps **b)
 {
     int max;
-    int one;
-    int two;
-    t_ps *tmp;
-    t_ps *tmp_next;
+    int mid;
     t_operations *operations;
 
-    one = 0;
-//    two = 0;
-    tmp = (*a);
     operations = NULL;
     max = find_max(a);
-    if (0 == (max % 3))
+    mid = max / 2;
+    sort_first_part(a, b, &operations, mid);
+    while (!(check_order_in_stack(a)))
     {
-        one = max - 2 * max / 3;
-//        two = 2 * max / 3;
+
     }
-    while (tmp)
+
+
+
+
+
+    /*   sort_of_three_numbers_by_ascending(a, b, &operations, 1);
+  while (operations)
+   {
+       printf("%s\n", (operations->str));
+       operations = operations->next;
+   }
+    printf("%d\n", check_order_in_stack(a))*/
+}
+
+void    sort_first_part(t_ps **a, t_ps **b, t_operations **operations, int mid)
+{
+    t_ps *tmp_a;
+    t_ps *tmp_next;
+
+    tmp_a = (*a);
+    while (tmp_a)
     {
-        tmp_next = tmp->next;
-        if (tmp->index <= one && 0 == (*a)->flag)
+        tmp_next = tmp_a->next;
+        if (tmp_a->index <= mid)
         {
             if (NULL == (*b))
             {
                 (*b) = (*a);
+                (*b)->block = 2;
                 (*a) = (*a)->next;
                 (*b)->next = NULL;
             }
             else
-                pb(a, b, &operations);
+            {
+                tmp_a->block = 2;
+                pb(a, b, operations);
+                if (1 == tmp_a->block)
+                    rb(b, a, operations);
+            }
         }
-        else if (0 == (*a)->flag)
+        else if (0 == (*a)->block)
         {
-            (*a)->flag = 1;
-            ra(a, &operations);
+            (*a)->block = 1;
+            ra(a, b, operations);
         }
-        tmp = tmp_next;
+        tmp_a = tmp_next;
     }
 }
 
-void    create_list_operations(t_operations **operations, t_ps **a, t_ps **b, char *s)
+void    sort_of_three_numbers_by_ascending(t_ps **a, t_ps **b, t_operations **operations, int flag)
 {
-    t_operations *step;
-    t_operations *tmp;
+    t_ps *n;
+    t_ps *n1;
+    t_ps *n2;
+    t_ps *n3;
 
-    if (NULL == (*operations))
+    n = (1 == flag) ? (*a) : (*b);
+    n1 = n;
+    n2 = n->next;
+    n3 = n2->next;
+    if ((n1->num < n2->num) && (n1->num < n3->num) && (n2->num > n3->num))
     {
-        if (!((*operations) = (t_operations *)malloc(sizeof(t_operations))))
-        {
-            free_list(a, 1);
-            exit(1);
-        }
-        (*operations)->str = s;
-        (*operations)->next = NULL;
-        return ;
+        sa(a, b, operations);
+        ra(a, b, operations);
     }
-    tmp = (*operations);
-    while (tmp->next)
-        tmp = tmp->next;
-    if (!(step = (t_operations *)malloc(sizeof(t_operations))))
+    else if ((n1->num < n2->num) && (n1->num > n3->num) && (n2->num > n3->num))
+        rra(a, b, operations);
+    else if ((n1->num > n2->num) && (n1->num < n3->num) && (n2->num < n3->num))
+        sa(a, b, operations);
+    else if ((n1->num > n2->num) && (n1->num > n3->num) && (n2->num > n3->num))
     {
-        free_list(a, 0);
-        free_list(b, 1);
-        free_list_operations(operations);
+        sa(a, b, operations);
+        rra(a, b, operations);
     }
-    step->str = s;
-    step->next = NULL;
-    tmp->next = step;
+    else if ((n1->num > n2->num) && (n1->num > n3->num) && (n2->num < n3->num))
+        ra(a, b, operations);
 }
-
