@@ -16,16 +16,24 @@ void    general_sort(t_ps **a, t_ps **b)
 {
     int max;
     int mid;
+    int n;
     t_operations *operations;
 
     operations = NULL;
     max = find_max(a);
     mid = max / 2;
-    sort_first_part(a, b, &operations, mid);
-    while (!(check_order_in_stack(a)))
-    {
+    sort_first_part(a, b, &operations, mid, n);
+//    while (!(check_order_in_stack(a)) и все элементы слева )
+ //   {
+        mid = find_max(b) / 2;
+//        printf("number is %d\n", mid);
+         while (find_max(b) > 3)
+            sort_another_parts(a, b, &operations, mid, n);
 
-    }
+
+
+
+  //  }
 
 
 
@@ -62,8 +70,6 @@ void    sort_first_part(t_ps **a, t_ps **b, t_operations **operations, int mid)
             {
                 tmp_a->block = 2;
                 pb(a, b, operations);
-                if (1 == tmp_a->block)
-                    rb(b, a, operations);
             }
         }
         else if (0 == (*a)->block)
@@ -72,6 +78,29 @@ void    sort_first_part(t_ps **a, t_ps **b, t_operations **operations, int mid)
             ra(a, b, operations);
         }
         tmp_a = tmp_next;
+    }
+}
+
+void    sort_another_parts(t_ps **a, t_ps **b, t_operations **operations, int mid, int n)
+{
+    t_ps *tmp_b;
+    t_ps *tmp_next;
+
+    tmp_b = (*b);
+    while (tmp_b)
+    {
+        tmp_next = tmp_b->next;
+        if (tmp_b->index > mid)
+        {
+            tmp_b->block *= 10; //переменная
+            pa(b, a, operations);
+        }
+        else if (2 == (*b)->block)
+        {
+            (*b)->block = 1;
+            rb(b, a, operations);
+        }
+        tmp_b = tmp_next;
     }
 }
 
