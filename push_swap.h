@@ -22,7 +22,7 @@
 typedef struct      s_ps
 {
     int             num;
-    long long       block;
+    int             block;
     int             index;
     int             sort;
     struct s_ps   *next;
@@ -39,6 +39,7 @@ int     find_max(t_ps **stack);
 int     find_min(t_ps **stack);
 int     c_l(char *s, int i);
 void    check_list_a(t_ps **a);
+void    print_operations(t_operations **operations);
 void    first_check(char **av, int ac);
 int     check_char(char c, int flag);
 void    free_list(t_ps **a, int flag);
@@ -47,6 +48,7 @@ char    **ft_split(char *str, t_ps **a);
 void    general_sort(t_ps **a, t_ps **b);
 int     check_number(t_ps **a, int number);
 void    sort_by_index(t_ps **a, int count);
+void    if_we_have_up_to_five_numbers(t_ps **a, t_ps **b, t_operations **operations);
 void    free_split(char **s, int words, int flag);
 int     func_atoi(char *str, int sign, int *indicator);
 int     check_string_of_array(char *s, int *indicator);
@@ -66,10 +68,15 @@ void    rrb(t_ps **b, t_ps **a, t_operations **operations);
 void    rrr(t_ps **a, t_ps **b, t_operations **operations);
 void    create_list_a(t_ps **a, int i, char **s, int words);
 void    filling_in_lists(t_ps **a, int i, char **s, int words);
-char    **mas_of_char(char *str, char **s, t_ps **a, int i, int j);
+char    **mas_of_char(char *str, char **s, t_ps **a, int i);
 void    sort_another_parts(t_ps **a, t_ps **b, t_operations **operations, int n);
 void    sort_first_part(t_ps **a, t_ps **b, t_operations **operations, int mid);
 void    sort_of_three_numbers_by_ascending(t_ps **a, t_ps **b, t_operations **operations, int flag);
 void    create_list_operations(t_operations **operations, t_ps **a, t_ps **b, char *s);
+void    sort_of_five_numbers_by_ascending(t_ps **a, t_ps **b, t_operations **operations);
+void    sort_of_two_numbers_by_ascending(t_ps **a, t_ps **b, t_operations **operations);
+void    sort_of_four_numbers_by_ascending(t_ps **a, t_ps **b, t_operations **operations);
+void    ability_to_combine(t_operations **operations, char *str1, char *str2, char *str3);
+void    general_sort_continue(t_ps **a, t_operations **operations);
 
 #endif

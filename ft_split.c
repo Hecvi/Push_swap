@@ -43,10 +43,12 @@ int     c_l(char *s, int i)
     return (count);
 }
 
-char    **mas_of_char(char *str, char **s, t_ps **a, int i, int j)
+char    **mas_of_char(char *str, char **s, t_ps **a, int i)
 {
     int k;
+    int j;
 
+    j = 0;
     while (str[i])
     {
         if (check_char(str[i], 3))
@@ -73,11 +75,9 @@ char    **mas_of_char(char *str, char **s, t_ps **a, int i, int j)
 char    **ft_split(char *str, t_ps **a)
 {
     int i;
-    int j;
     char **s;
 
     i = 0;
-    j = 0;
     if (!str)
         return (NULL);
     if (!(s = (char **)malloc(sizeof(char *) * (c_w(str) + 1))))
@@ -87,5 +87,5 @@ char    **ft_split(char *str, t_ps **a)
     }
     while (check_char(str[i], 2))
         i++;
-    return (mas_of_char(str, s, a, i, j));
+    return (mas_of_char(str, s, a, i));
 }

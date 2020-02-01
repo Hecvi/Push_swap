@@ -16,18 +16,20 @@ int    find_min(t_ps **stack)
 {
     t_ps *tmp;
     t_ps *min;
+    int block;
     int minimum;
 
     tmp = (*stack);
     min = (*stack);
+    block = (*stack)->block;
     if (NULL == (*stack))
         return (0);
-    minimum = (*stack)->num;
-    while (tmp)
+    minimum = (*stack)->index;
+    while (tmp && tmp->block == block)
     {
-        if (tmp->num < minimum)
+        if (tmp->index < minimum)
         {
-            minimum = tmp->num;
+            minimum = tmp->index;
             min = tmp;
         }
         tmp = tmp->next;
@@ -39,18 +41,20 @@ int    find_max(t_ps **stack)
 {
     t_ps *tmp;
     t_ps *max;
+    int block;
     int maximum;
 
     tmp = (*stack);
     max = (*stack);
+    block = (*stack)->block;
     if (NULL == (*stack))
         return (0);
-    maximum = (*stack)->num;
-    while (tmp)
+    maximum = (*stack)->index;
+    while (tmp && tmp->block == block)
     {
-        if (tmp->num > maximum)
+        if (tmp->index > maximum)
         {
-            maximum = tmp->num;
+            maximum = tmp->index;
             max = tmp;
         }
         tmp = tmp->next;

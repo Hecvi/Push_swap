@@ -12,69 +12,6 @@
 
 #include "push_swap.h"
 
-void    general_sort(t_ps **a, t_ps **b)
-{
-    int n;
-    t_operations *operations;
-
-    n = 3;
-    operations = NULL;
-    sort_first_part(a, b, &operations, (find_max(a) / 2));
-//    while (!(check_order_in_stack(a)) и все элементы слева )
- //   {
-//        printf("number is %d\n", mid);
-         while (find_max(b) > 3)
-         {
-             sort_another_parts(a, b, &operations, n);
-             n++;
-         }
-         if (3 == find_max(b))
-         {
-             sort_of_three_numbers_by_ascending(a, b, &operations, 0);
-             while (*b)
-             {
-                 pa(b, a, &operations);
-                 ra(a, b, &operations);
-                 (*b)->sort = 1;
-             }
-        }
-         else if ((*b) && (*b)->next)
-         {
-             if ((*b)->index > (*b)->next->index)
-                 sb(b, a, &operations);
-             while (*b)
-             {
-                 pa(b, a, &operations);
-                 ra(a, b, &operations);
-                 (*b)->sort = 1;
-             }
-         }
-         else if ((*b))
-         {
-             pa(b, a, &operations);
-             ra(a, b, &operations);
-             (*b)->sort = 1;
-         }
-
-else
-    return ;
-
-
-  //  }
-
-
-
-
-
-    /*   sort_of_three_numbers_by_ascending(a, b, &operations, 1);
-  while (operations)
-   {
-       printf("%s\n", (operations->str));
-       operations = operations->next;
-   }
-    printf("%d\n", check_order_in_stack(a))*/
-}
-
 void    sort_first_part(t_ps **a, t_ps **b, t_operations **operations, int mid)
 {
     t_ps *tmp_a;
@@ -108,6 +45,72 @@ void    sort_first_part(t_ps **a, t_ps **b, t_operations **operations, int mid)
     }
 }
 
+void    general_sort(t_ps **a, t_ps **b)
+{
+    int n;
+    t_operations *operations;
+
+    n = 3;
+    operations = NULL;
+    if_we_have_up_to_five_numbers(a, b, &operations);
+    sort_first_part(a, b, &operations, (find_max(a) / 2));
+    while (!check_order_in_stack(a) && (*b))
+    {
+        if (*b)
+        {
+            sort_another_parts(a, b, &operations, n);
+        }
+
+        while (find_max(b) > 3) {
+            sort_another_parts(a, b, &operations, n);
+            n++;
+        }
+        if (3 == find_max(b)) {
+            sort_of_three_numbers_by_ascending(a, b, &operations, 0);
+            while (*b) {
+                (*b)->sort = 1;
+                pa(b, a, &operations);
+                ra(a, b, &operations);
+            }
+        } else if ((*b) && (*b)->next) {
+            if ((*b)->next->index > (*b)->index)
+                sb(b, a, &operations);
+            while (*b) {
+                (*b)->sort = 1;
+                pa(b, a, &operations);
+                ra(a, b, &operations);
+            }
+        } else if (*b) {
+            (*b)->sort = 1;
+            pa(b, a, &operations);
+            ra(a, b, &operations);
+        }
+        if (find_max(a) == 2) {
+            if ((*a)->next->index > (*a)->index)
+                sa(a, b, &operations);
+            (*a)->sort = 1;
+            ra(a, b, &operations);
+            (*a)->sort = 1;
+            ra(a, b, &operations);
+        } else if (find_max(a) == 1) {
+            (*a)->sort = 1;
+            ra(a, b, &operations);
+        }
+    }
+    general_sort_continue(a, b, &operations);
+}
+
+void    general_sort_continue(t_ps **a, t_operations **operations)
+{
+    ability_to_combine(operations, "sa", "sb", "ss");
+    ability_to_combine(operations, "ra", "rb", "rr");
+    ability_to_combine(operations, "rra", "rrb", "rrr");
+    print_operations(operations);
+    free_list_operations(operations);
+    free_list(a, 0);
+    exit (0);
+}
+
 void    sort_another_parts(t_ps **a, t_ps **b, t_operations **operations, int n)
 {
     int mid;
@@ -123,9 +126,9 @@ void    sort_another_parts(t_ps **a, t_ps **b, t_operations **operations, int n)
         tmp_next = tmp_b->next;
         if (tmp_b->index == min && (*b)->block != n + 1)
         {
+            tmp_b->sort = 1;
             pa(b, a, operations);
             ra(a, b, operations);
-            tmp_b->sort = 1;
             min++;
         }
         else if (tmp_b->index > mid)
@@ -142,31 +145,3 @@ void    sort_another_parts(t_ps **a, t_ps **b, t_operations **operations, int n)
     }
 }
 
-void    sort_of_three_numbers_by_ascending(t_ps **a, t_ps **b, t_operations **operations, int flag)
-{
-    t_ps *n;
-    t_ps *n1;
-    t_ps *n2;
-    t_ps *n3;
-
-    n = (1 == flag) ? (*a) : (*b);
-    n1 = n;
-    n2 = n->next;
-    n3 = n2->next;
-    if ((n1->num < n2->num) && (n1->num < n3->num) && (n2->num > n3->num))
-    {
-        sa(a, b, operations);
-        ra(a, b, operations);
-    }
-    else if ((n1->num < n2->num) && (n1->num > n3->num) && (n2->num > n3->num))
-        rra(a, b, operations);
-    else if ((n1->num > n2->num) && (n1->num < n3->num) && (n2->num < n3->num))
-        sa(a, b, operations);
-    else if ((n1->num > n2->num) && (n1->num > n3->num) && (n2->num > n3->num))
-    {
-        sa(a, b, operations);
-        rra(a, b, operations);
-    }
-    else if ((n1->num > n2->num) && (n1->num > n3->num) && (n2->num < n3->num))
-        ra(a, b, operations);
-}

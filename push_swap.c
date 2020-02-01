@@ -47,6 +47,8 @@ int     func_atoi(char *str, int sign, int *indicator)
     return ((int)number * sign);
 }
 
+
+
 #include <stdio.h>
 
 int     main(int ac, char **av)
@@ -74,7 +76,7 @@ int     main(int ac, char **av)
     printf("stack A\n");
     while (a)
     {
-        printf("%d\n", (a->block));
+        printf("%d\n", (a->index));
         a = a->next;
     }
     printf("\nstack B\n");
@@ -83,7 +85,7 @@ int     main(int ac, char **av)
         printf("%d\n", (b->index));
         b = b->next;
     }
-    //free operations and lists
+
 
     return (0);
 }
