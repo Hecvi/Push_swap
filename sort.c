@@ -14,23 +14,50 @@
 
 void    general_sort(t_ps **a, t_ps **b)
 {
-    int max;
-    int mid;
     int n;
     t_operations *operations;
 
+    n = 3;
     operations = NULL;
-    max = find_max(a);
-    mid = max / 2;
-    sort_first_part(a, b, &operations, mid, n);
+    sort_first_part(a, b, &operations, (find_max(a) / 2));
 //    while (!(check_order_in_stack(a)) и все элементы слева )
  //   {
-        mid = find_max(b) / 2;
 //        printf("number is %d\n", mid);
          while (find_max(b) > 3)
-            sort_another_parts(a, b, &operations, mid, n);
+         {
+             sort_another_parts(a, b, &operations, n);
+             n++;
+         }
+         if (3 == find_max(b))
+         {
+             sort_of_three_numbers_by_ascending(a, b, &operations, 0);
+             while (*b)
+             {
+                 pa(b, a, &operations);
+                 ra(a, b, &operations);
+                 (*b)->sort = 1;
+             }
+        }
+         else if ((*b) && (*b)->next)
+         {
+             if ((*b)->index > (*b)->next->index)
+                 sb(b, a, &operations);
+             while (*b)
+             {
+                 pa(b, a, &operations);
+                 ra(a, b, &operations);
+                 (*b)->sort = 1;
+             }
+         }
+         else if ((*b))
+         {
+             pa(b, a, &operations);
+             ra(a, b, &operations);
+             (*b)->sort = 1;
+         }
 
-
+else
+    return ;
 
 
   //  }
@@ -81,23 +108,34 @@ void    sort_first_part(t_ps **a, t_ps **b, t_operations **operations, int mid)
     }
 }
 
-void    sort_another_parts(t_ps **a, t_ps **b, t_operations **operations, int mid, int n)
+void    sort_another_parts(t_ps **a, t_ps **b, t_operations **operations, int n)
 {
+    int mid;
+    int min;
     t_ps *tmp_b;
     t_ps *tmp_next;
 
+    min = find_min(b);
+    mid = find_max(b) / 2;
     tmp_b = (*b);
-    while (tmp_b)
+    while (tmp_b && (*b)->block != n + 1)
     {
         tmp_next = tmp_b->next;
-        if (tmp_b->index > mid)
+        if (tmp_b->index == min && (*b)->block != n + 1)
         {
-            tmp_b->block *= 10; //переменная
+            pa(b, a, operations);
+            ra(a, b, operations);
+            tmp_b->sort = 1;
+            min++;
+        }
+        else if (tmp_b->index > mid)
+        {
+            tmp_b->block = n;
             pa(b, a, operations);
         }
-        else if (2 == (*b)->block)
+        else if ((*b)->block != n)
         {
-            (*b)->block = 1;
+            (*b)->block = n + 1;
             rb(b, a, operations);
         }
         tmp_b = tmp_next;

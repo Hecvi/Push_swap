@@ -12,16 +12,41 @@
 
 #include "push_swap.h"
 
-int    find_max(t_ps **a)
+int    find_min(t_ps **stack)
+{
+    t_ps *tmp;
+    t_ps *min;
+    int minimum;
+
+    tmp = (*stack);
+    min = (*stack);
+    if (NULL == (*stack))
+        return (0);
+    minimum = (*stack)->num;
+    while (tmp)
+    {
+        if (tmp->num < minimum)
+        {
+            minimum = tmp->num;
+            min = tmp;
+        }
+        tmp = tmp->next;
+    }
+    return (min->index);
+}
+
+int    find_max(t_ps **stack)
 {
     t_ps *tmp;
     t_ps *max;
     int maximum;
 
-    tmp = (*a);
-    max = (*a);
-    maximum = (*a)->num;
-    while (tmp && tmp->flag == (*a)->flag)
+    tmp = (*stack);
+    max = (*stack);
+    if (NULL == (*stack))
+        return (0);
+    maximum = (*stack)->num;
+    while (tmp)
     {
         if (tmp->num > maximum)
         {
@@ -107,7 +132,7 @@ void    filling_in_lists(t_ps **a, int i, char **s, int words)
     if (!(b = (t_ps *)malloc(sizeof(t_ps))))
         free_all(s, words, a, 1);
     b->num = i;
-    b->flag = 0;
+    b->sort = 0;
     b->index = 0;
     b->block = 0;
     b->next = NULL;
@@ -125,7 +150,7 @@ void    create_list_a(t_ps **a, int i, char **s, int words)
             exit(1);
         }
         (*a)->num = i;
-        (*a)->flag = 0;
+        (*a)->sort = 0;
         (*a)->index = 0;
         (*a)->block = 0;
         (*a)->next = NULL;

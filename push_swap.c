@@ -74,7 +74,7 @@ int     main(int ac, char **av)
     printf("stack A\n");
     while (a)
     {
-        printf("%d\n", (a->index));
+        printf("%d\n", (a->block));
         a = a->next;
     }
     printf("\nstack B\n");

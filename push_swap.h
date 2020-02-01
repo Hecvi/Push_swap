@@ -22,9 +22,9 @@
 typedef struct      s_ps
 {
     int             num;
-    int             block;
+    long long       block;
     int             index;
-    int             flag;
+    int             sort;
     struct s_ps   *next;
 }                   t_ps;
 
@@ -35,7 +35,8 @@ typedef struct      s_operations
 }                   t_operations;
 
 int     c_w(char *s);
-int     find_max(t_ps **a);
+int     find_max(t_ps **stack);
+int     find_min(t_ps **stack);
 int     c_l(char *s, int i);
 void    check_list_a(t_ps **a);
 void    first_check(char **av, int ac);
@@ -66,7 +67,7 @@ void    rrr(t_ps **a, t_ps **b, t_operations **operations);
 void    create_list_a(t_ps **a, int i, char **s, int words);
 void    filling_in_lists(t_ps **a, int i, char **s, int words);
 char    **mas_of_char(char *str, char **s, t_ps **a, int i, int j);
-void    sort_another_parts(t_ps **a, t_ps **b, t_operations **operations, int mid);
+void    sort_another_parts(t_ps **a, t_ps **b, t_operations **operations, int n);
 void    sort_first_part(t_ps **a, t_ps **b, t_operations **operations, int mid);
 void    sort_of_three_numbers_by_ascending(t_ps **a, t_ps **b, t_operations **operations, int flag);
 void    create_list_operations(t_operations **operations, t_ps **a, t_ps **b, char *s);
