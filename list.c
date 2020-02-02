@@ -19,11 +19,11 @@ int    find_min(t_ps **stack)
     int block;
     int minimum;
 
+    if (NULL == (*stack))
+        return (0);
     tmp = (*stack);
     min = (*stack);
     block = (*stack)->block;
-    if (NULL == (*stack))
-        return (0);
     minimum = (*stack)->index;
     while (tmp && tmp->block == block)
     {
@@ -44,11 +44,11 @@ int    find_max(t_ps **stack)
     int block;
     int maximum;
 
+    if (NULL == (*stack))
+        return (0);
     tmp = (*stack);
     max = (*stack);
     block = (*stack)->block;
-    if (NULL == (*stack))
-        return (0);
     maximum = (*stack)->index;
     while (tmp && tmp->block == block)
     {

@@ -40,16 +40,16 @@ void    free_all(char **s, int words, t_ps **a, int flag)
     exit(1);
 }
 
-void    free_list(t_ps **a, int flag)
+void    free_list(t_ps **stack, int flag)
 {
     t_ps *tmp;
 
-    tmp = (*a);
-    while (*a)
+    tmp = (*stack);
+    while (*stack)
     {
-        (*a) = (*a)->next;
+        (*stack) = (*stack)->next;
         free(tmp);
-        tmp = (*a);
+        tmp = (*stack);
     }
     if (1 == flag)
         write(1, "Memory allocation error\n", 24);

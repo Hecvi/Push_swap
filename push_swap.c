@@ -47,7 +47,45 @@ int     func_atoi(char *str, int sign, int *indicator)
     return ((int)number * sign);
 }
 
+void    print_operations(t_operations **operations)
+{
+    t_operations *tmp;
 
+    tmp = (*operations);
+    while (tmp)
+    {
+        write(1, tmp->str, ft_strlen(tmp->str));
+        write(1, "\n", 1);
+        tmp = tmp->next;
+    }
+}
+
+void    ability_to_combine(t_operations **operations, char *str1, char *str2, char *str3)
+{
+    t_operations *tmp;
+    t_operations *tmp_next;
+
+    tmp = (*operations);
+    if (tmp && tmp->next)
+        tmp_next = tmp->next;
+    else
+        return ;
+    while (tmp)
+    {
+        if (tmp_next)
+            if ((!ft_strcmp(tmp->str, str1) && !ft_strcmp(tmp_next->str, str2)) ||
+                (!ft_strcmp(tmp->str, str2) && !ft_strcmp(tmp_next->str, str1)))
+            {
+                tmp->str = str3;
+                tmp->next = tmp_next->next;
+                free(tmp_next);
+                tmp_next = NULL;
+            }
+        tmp = tmp->next;
+        if (tmp && tmp->next)
+            tmp_next = tmp->next;
+    }
+}
 
 #include <stdio.h>
 
@@ -72,7 +110,6 @@ int     main(int ac, char **av)
 //    b = check_order_in_stack(&a);
 //    printf("%d\n", b);
     general_sort(&a, &b);
-
     printf("stack A\n");
     while (a)
     {
@@ -85,8 +122,6 @@ int     main(int ac, char **av)
         printf("%d\n", (b->index));
         b = b->next;
     }
-
-
     return (0);
 }
 

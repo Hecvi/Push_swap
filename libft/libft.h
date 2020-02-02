@@ -17,6 +17,9 @@
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <fcntl.h>
+# define FD_MAX 4864
+# define BUFF_SIZE 9999
 
 typedef struct		s_list
 {
@@ -90,5 +93,6 @@ unsigned char		ft_swap_bits(unsigned char octet);
 unsigned char		ft_reverse_bits(unsigned char octet);
 void				ft_print_bits(unsigned char octet);
 char				*ft_strndup(const char *s1, size_t n);
+int				get_next_line(const int fd, char **line);
 
 #endif

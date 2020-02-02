@@ -42,7 +42,7 @@ void    check_list_a(t_ps **a);
 void    print_operations(t_operations **operations);
 void    first_check(char **av, int ac);
 int     check_char(char c, int flag);
-void    free_list(t_ps **a, int flag);
+void    free_list(t_ps **stack, int flag);
 int     check_order_in_stack(t_ps **a);
 char    **ft_split(char *str, t_ps **a);
 void    general_sort(t_ps **a, t_ps **b);
@@ -50,6 +50,8 @@ int     check_number(t_ps **a, int number);
 void    sort_by_index(t_ps **a, int count);
 void    if_we_have_up_to_five_numbers(t_ps **a, t_ps **b, t_operations **operations);
 void    free_split(char **s, int words, int flag);
+void    start_read_gnl(t_ps **a, t_ps **b, t_operations **operations);
+void    continue_read_gnl(t_ps **a, t_ps **b, t_operations **operations, char *str);
 int     func_atoi(char *str, int sign, int *indicator);
 int     check_string_of_array(char *s, int *indicator);
 void    second_check(char **av, t_ps **a, int i, int j);
@@ -77,6 +79,8 @@ void    sort_of_five_numbers_by_ascending(t_ps **a, t_ps **b, t_operations **ope
 void    sort_of_two_numbers_by_ascending(t_ps **a, t_ps **b, t_operations **operations);
 void    sort_of_four_numbers_by_ascending(t_ps **a, t_ps **b, t_operations **operations);
 void    ability_to_combine(t_operations **operations, char *str1, char *str2, char *str3);
-void    general_sort_continue(t_ps **a, t_operations **operations);
+void    the_end_of_sorting(t_ps **a, t_operations **operations);
+void    check_sort_stack_b_and_a(t_ps **a, t_ps **b, t_operations **operations);
+void    transfer_from_a_to_b(t_ps **a, t_ps **b, t_operations **operations);
 
 #endif

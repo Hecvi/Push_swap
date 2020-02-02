@@ -17,27 +17,26 @@ void    if_we_have_up_to_five_numbers(t_ps **a, t_ps **b, t_operations **operati
     int max;
 
     max = find_max(a);
-    if (1 == max)
+    if (max <= 5)
     {
-        free_list(a, 0);
-        exit (0);
+        if (!check_order_in_stack(a))
+        {
+            if (1 == max)
+            {
+                free_list(a, 0);
+                exit(0);
+            }
+            if (2 == max)
+                sa(a, b, operations);
+            else if (3 == max)
+                sort_of_three_numbers_by_ascending(a, b, operations, 1);
+            else if (4 == max)
+                sort_of_four_numbers_by_ascending(a, b, operations);
+            else if (5 == max)
+                sort_of_five_numbers_by_ascending(a, b, operations);
+        }
+        the_end_of_sorting(a, operations);
     }
-    if (2 == max)
-        if ((*a)->next->index < (*a)->index)
-            sa(a, b, operations);
-    if (3 == max && !check_order_in_stack(a))
-        sort_of_three_numbers_by_ascending(a, b, operations, 1);
-    else if (4 == max && !check_order_in_stack(a))
-        sort_of_four_numbers_by_ascending(a, b, operations);
-    else if (5 == max && !check_order_in_stack(a))
-        sort_of_five_numbers_by_ascending(a, b, operations);
-    ability_to_combine(operations, "sa", "sb", "ss");
-    ability_to_combine(operations, "ra", "rb", "rr");
-    ability_to_combine(operations, "rra", "rrb", "rrr");
-    print_operations(operations);
-    free_list_operations(operations);
-    free_list(a, 0);
-    exit (0);
 }
 
 void sort_of_two_numbers_by_ascending(t_ps **a, t_ps **b, t_operations **operations)
