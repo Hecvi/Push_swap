@@ -35,9 +35,11 @@ typedef struct      s_operations
 }                   t_operations;
 
 int     c_w(char *s);
+int    cardinality(t_ps **stack);
 int     find_max(t_ps **stack);
 int     find_min(t_ps **stack);
 int     c_l(char *s, int i);
+int     find_mid(t_ps **stack);
 void    check_list_a(t_ps **a);
 void    print_operations(t_operations **operations);
 void    first_check(char **av, int ac);
@@ -51,6 +53,7 @@ void    sort_by_index(t_ps **a, int count);
 void    if_we_have_up_to_five_numbers(t_ps **a, t_ps **b, t_operations **operations);
 void    free_split(char **s, int words, int flag);
 void    start_read_gnl(t_ps **a, t_ps **b, t_operations **operations);
+void    zeroing_the_blocks(t_ps **a);
 void    continue_read_gnl(t_ps **a, t_ps **b, t_operations **operations, char *str);
 int     func_atoi(char *str, int sign, int *indicator);
 int     check_string_of_array(char *s, int *indicator);
@@ -71,9 +74,11 @@ void    rrr(t_ps **a, t_ps **b, t_operations **operations);
 void    create_list_a(t_ps **a, int i, char **s, int words);
 void    filling_in_lists(t_ps **a, int i, char **s, int words);
 char    **mas_of_char(char *str, char **s, t_ps **a, int i);
+void    flipping_to_the_top(t_ps **a, t_ps **b, t_operations **operations);
 void    sort_another_parts(t_ps **a, t_ps **b, t_operations **operations, int n);
 void    sort_first_part(t_ps **a, t_ps **b, t_operations **operations, int mid);
-void    sort_of_three_numbers_by_ascending(t_ps **a, t_ps **b, t_operations **operations, int flag);
+void    sort_of_three_numbers_by_ascending_in_a(t_ps **a, t_ps **b, t_operations **operations);
+void    sort_of_three_numbers_by_ascending_in_b(t_ps **a, t_ps **b, t_operations **operations);
 void    create_list_operations(t_operations **operations, t_ps **a, t_ps **b, char *s);
 void    sort_of_five_numbers_by_ascending(t_ps **a, t_ps **b, t_operations **operations);
 void    sort_of_two_numbers_by_ascending(t_ps **a, t_ps **b, t_operations **operations);
@@ -82,5 +87,8 @@ void    ability_to_combine(t_operations **operations, char *str1, char *str2, ch
 void    the_end_of_sorting(t_ps **a, t_operations **operations);
 void    check_sort_stack_b_and_a(t_ps **a, t_ps **b, t_operations **operations);
 void    transfer_from_a_to_b(t_ps **a, t_ps **b, t_operations **operations);
+void    check_sort_stack_b_and_a_continue(t_ps **a, t_ps **b, t_operations **operations);
+void    help_with_operations_in_a(t_ps **a, t_ps **b, t_operations **operations);
+void    help_with_operations_in_b(t_ps **a, t_ps **b, t_operations **operations);
 
 #endif

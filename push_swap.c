@@ -49,15 +49,18 @@ int     func_atoi(char *str, int sign, int *indicator)
 
 void    print_operations(t_operations **operations)
 {
+    int count; //
     t_operations *tmp;
 
     tmp = (*operations);
     while (tmp)
     {
+        count++; //
         write(1, tmp->str, ft_strlen(tmp->str));
         write(1, "\n", 1);
         tmp = tmp->next;
     }
+    printf("%d", count); //
 }
 
 void    ability_to_combine(t_operations **operations, char *str1, char *str2, char *str3)

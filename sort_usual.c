@@ -29,7 +29,7 @@ void    if_we_have_up_to_five_numbers(t_ps **a, t_ps **b, t_operations **operati
             if (2 == max)
                 sa(a, b, operations);
             else if (3 == max)
-                sort_of_three_numbers_by_ascending(a, b, operations, 1);
+                sort_of_three_numbers_by_ascending_in_a(a, b, operations);
             else if (4 == max)
                 sort_of_four_numbers_by_ascending(a, b, operations);
             else if (5 == max)
@@ -53,17 +53,41 @@ void sort_of_two_numbers_by_ascending(t_ps **a, t_ps **b, t_operations **operati
     pa(b, a, operations);
     ra(a, b, operations);
 }
-
-void    sort_of_three_numbers_by_ascending(t_ps **a, t_ps **b, t_operations **operations, int flag)
+void    sort_of_three_numbers_by_ascending_in_b(t_ps **a, t_ps **b, t_operations **operations)
 {
-    t_ps *n;
     t_ps *n1;
     t_ps *n2;
     t_ps *n3;
 
-    n = (1 == flag) ? (*a) : (*b);
-    n1 = n;
-    n2 = n->next;
+    n1 = (*b);
+    n2 = n1->next;
+    n3 = n2->next;
+    if ((n1->num < n2->num) && (n1->num < n3->num) && (n2->num > n3->num))
+    {
+        sb(b, a, operations);
+        rb(b, a, operations);
+    }
+    else if ((n1->num < n2->num) && (n1->num > n3->num) && (n2->num > n3->num))
+        rrb(b, a, operations);
+    else if ((n1->num > n2->num) && (n1->num < n3->num) && (n2->num < n3->num))
+        sb(b, a, operations);
+    else if ((n1->num > n2->num) && (n1->num > n3->num) && (n2->num > n3->num))
+    {
+        sb(b, a, operations);
+        rrb(b, a, operations);
+    }
+    else if ((n1->num > n2->num) && (n1->num > n3->num) && (n2->num < n3->num))
+        rb(b, a, operations);
+}
+
+void    sort_of_three_numbers_by_ascending_in_a(t_ps **a, t_ps **b, t_operations **operations)
+{
+    t_ps *n1;
+    t_ps *n2;
+    t_ps *n3;
+
+    n1 = (*a);
+    n2 = n1->next;
     n3 = n2->next;
     if ((n1->num < n2->num) && (n1->num < n3->num) && (n2->num > n3->num))
     {
@@ -124,6 +148,6 @@ void sort_of_five_numbers_by_ascending(t_ps **a, t_ps **b, t_operations **operat
             ra(a, b, operations);
         tmp = tmp_next;
     }
-    sort_of_three_numbers_by_ascending(a, b, operations, 1);
+    sort_of_three_numbers_by_ascending_in_a(a, b, operations);
     sort_of_two_numbers_by_ascending(a, b, operations);
 }
