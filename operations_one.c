@@ -22,7 +22,7 @@ void sa(t_ps **a, t_ps **b, t_operations **operations)
         (*a)->next = l->next;
         l->next = (*a);
         (*a) = l;
-        create_list_operations(operations, a, b, "sa");
+        create_list_oper(operations, a, b, "sa");
     }
 }
 
@@ -36,7 +36,7 @@ void    pa(t_ps **b, t_ps **a, t_operations **operations)
         (*b)->next = (*a);
         (*a) = (*b);
         (*b) = l;
-        create_list_operations(operations, a, b, "pa");
+        create_list_oper(operations, a, b, "pa");
     }
 }
 
@@ -54,7 +54,7 @@ void    ra(t_ps **a, t_ps **b, t_operations **operations)
         l->next = (*a);
         (*a)->next = NULL;
         (*a) = tmp;
-        create_list_operations(operations, a, b, "ra");
+        create_list_oper(operations, a, b, "ra");
     }
 }
 
@@ -64,7 +64,7 @@ void    rr(t_ps **a, t_ps **b, t_operations **operations)
     {
         ra(a, b, operations);
         rb(b, a, operations);
-        create_list_operations(operations, a, b, "rr");
+        create_list_oper(operations, a, b, "rr");
     }
 }
 
@@ -82,6 +82,6 @@ void    rra(t_ps **a, t_ps **b, t_operations **operations)
         l->next = NULL;
         tmp->next = (*a);
         (*a) = tmp;
-        create_list_operations(operations, a, b, "rra");
+        create_list_oper(operations, a, b, "rra");
     }
 }

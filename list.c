@@ -12,71 +12,6 @@
 
 #include "push_swap.h"
 
-int    find_min(t_ps **stack)
-{
-    t_ps *tmp;
-    t_ps *min;
-    int block;
-    int minimum;
-
-    if (NULL == (*stack))
-        return (0);
-    tmp = (*stack);
-    min = (*stack);
-    block = (*stack)->block;
-    minimum = (*stack)->index;
-    while (tmp && tmp->block == block)
-    {
-        if (tmp->index < minimum)
-        {
-            minimum = tmp->index;
-            min = tmp;
-        }
-        tmp = tmp->next;
-    }
-    return (min->index);
-}
-
-int    find_max(t_ps **stack)
-{
-    t_ps *tmp;
-    t_ps *max;
-    int block;
-    int maximum;
-
-    if (NULL == (*stack))
-        return (0);
-    tmp = (*stack);
-    max = (*stack);
-    block = (*stack)->block;
-    maximum = (*stack)->index;
-    while (tmp && tmp->block == block)
-    {
-        if (tmp->index > maximum)
-        {
-            maximum = tmp->index;
-            max = tmp;
-        }
-        tmp = tmp->next;
-    }
-    return (max->index);
-}
-
-int     check_order_in_stack(t_ps **a)
-{
-    t_ps *tmp;
-
-    tmp = (*a);
-    while (tmp)
-    {
-        if (tmp->next)
-            if (tmp->index > tmp->next->index)
-                return (0);
-        tmp = tmp->next;
-    }
-    return (1);
-}
-
 void    check_list_a(t_ps **a)
 {
     t_ps *tmp;
@@ -94,7 +29,6 @@ void    check_list_a(t_ps **a)
         return ;
     write(1, "Incorrect data\n", 15);
     exit (1);
-
 }
 
 void    sort_by_index(t_ps **a, int count)
@@ -163,7 +97,7 @@ void    create_list_a(t_ps **a, int i, char **s, int words)
     filling_in_lists(a, i, s, words);
 }
 
-void    create_list_operations(t_operations **operations, t_ps **a, t_ps **b, char *s)
+void    create_list_oper(t_operations **operations, t_ps **a, t_ps **b, char *s)
 {
     t_operations *step;
     t_operations *tmp;

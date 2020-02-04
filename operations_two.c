@@ -22,7 +22,7 @@ void    sb(t_ps **b, t_ps **a, t_operations **operations)
         (*b)->next = l->next;
         l->next = (*b);
         (*b) = l;
-        create_list_operations(operations, a, b, "sb");
+        create_list_oper(operations, a, b, "sb");
     }
 }
 
@@ -36,7 +36,7 @@ void    pb(t_ps **a, t_ps **b, t_operations **operations)
         (*a)->next = (*b);
         (*b) = (*a);
         (*a) = l;
-        create_list_operations(operations, a, b, "pb");
+        create_list_oper(operations, a, b, "pb");
     }
 }
 
@@ -54,7 +54,7 @@ void    rb(t_ps **b, t_ps **a, t_operations **operations)
         l->next = (*b);
         (*b)->next = NULL;
         (*b) = tmp;
-        create_list_operations(operations, a, b, "rb");
+        create_list_oper(operations, a, b, "rb");
     }
 }
 
@@ -72,7 +72,7 @@ void    rrb(t_ps **b, t_ps **a, t_operations **operations)
         l->next = NULL;
         tmp->next = (*b);
         (*b) = tmp;
-        create_list_operations(operations, a, b, "rrb");
+        create_list_oper(operations, a, b, "rrb");
     }
 }
 
@@ -82,6 +82,6 @@ void    ss(t_ps **a, t_ps **b, t_operations **operations)
     {
         sa(a, b, operations);
         sb(b, a, operations);
-        create_list_operations(operations, a, b, "ss");
+        create_list_oper(operations, a, b, "ss");
     }
 }

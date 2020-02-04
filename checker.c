@@ -35,11 +35,11 @@ void    start_read_gnl(t_ps **a, t_ps **b, t_operations **operations)
         else if (!ft_strcmp(str, "pb"))
             pb(a, b, operations);
         else
-            continue_read_gnl(a, b, operations, str);
+            end_read_gnl(a, b, operations, str);
     }
 }
 
-void    continue_read_gnl(t_ps **a, t_ps **b, t_operations **operations, char *str)
+void    end_read_gnl(t_ps **a, t_ps **b, t_operations **operations, char *str)
 {
     if (!ft_strcmp(str, "rra"))
         rra(a, b, operations);

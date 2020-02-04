@@ -25,7 +25,7 @@ SOURCE = ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c \
 		 ft_putendl_fd.c ft_putnbr_fd.c ft_lstnew.c ft_lstdelone.c \
 		 ft_lstdel.c ft_lstadd.c ft_lstiter.c ft_lstmap.c ft_strrev.c \
 		 ft_sort_array.c ft_swap_bits.c ft_reverse_bits.c ft_print_bits.c \
-		 ft_strndup.c
+		 ft_strndup.c get_next_line.c
 
 OBJECTS = ft_memset.o ft_bzero.o ft_memcpy.o ft_memccpy.o ft_memmove.o \
 		  ft_memchr.o ft_memcmp.o ft_strlen.o ft_strdup.o ft_strcpy.o \
@@ -40,7 +40,7 @@ OBJECTS = ft_memset.o ft_bzero.o ft_memcpy.o ft_memccpy.o ft_memmove.o \
 		  ft_putendl_fd.o ft_putnbr_fd.o ft_lstnew.o ft_lstdelone.o \
 		  ft_lstdel.o ft_lstadd.o ft_lstiter.o ft_lstmap.o ft_strrev.o \
 		  ft_sort_array.o ft_swap_bits.o ft_reverse_bits.o ft_print_bits.o \
-		  ft_strndup.o
+		  ft_strndup.o get_next_line.o
 
 HEADERS = ./libft.h
 

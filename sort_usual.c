@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void    if_we_have_up_to_five_numbers(t_ps **a, t_ps **b, t_operations **operations)
+void    if_we_have_up_to_five_num(t_ps **a, t_ps **b, t_operations **operations)
 {
     int max;
 
@@ -29,17 +29,17 @@ void    if_we_have_up_to_five_numbers(t_ps **a, t_ps **b, t_operations **operati
             if (2 == max)
                 sa(a, b, operations);
             else if (3 == max)
-                sort_of_three_numbers_by_ascending_in_a(a, b, operations);
+                sort_of_three_num_in_a(a, b, operations);
             else if (4 == max)
-                sort_of_four_numbers_by_ascending(a, b, operations);
+                sort_of_four_num(a, b, operations);
             else if (5 == max)
-                sort_of_five_numbers_by_ascending(a, b, operations);
+                sort_of_five_num(a, b, operations);
         }
         the_end_of_sorting(a, operations);
     }
 }
 
-void sort_of_two_numbers_by_ascending(t_ps **a, t_ps **b, t_operations **operations)
+void    sort_of_two_num(t_ps **a, t_ps **b, t_operations **operations)
 {
     t_ps *tmp;
     t_ps *tmp_next;
@@ -53,7 +53,7 @@ void sort_of_two_numbers_by_ascending(t_ps **a, t_ps **b, t_operations **operati
     pa(b, a, operations);
     ra(a, b, operations);
 }
-void    sort_of_three_numbers_by_ascending_in_b(t_ps **a, t_ps **b, t_operations **operations)
+void    sort_of_three_num_in_b(t_ps **a, t_ps **b, t_operations **operations)
 {
     t_ps *n1;
     t_ps *n2;
@@ -80,7 +80,7 @@ void    sort_of_three_numbers_by_ascending_in_b(t_ps **a, t_ps **b, t_operations
         rb(b, a, operations);
 }
 
-void    sort_of_three_numbers_by_ascending_in_a(t_ps **a, t_ps **b, t_operations **operations)
+void    sort_of_three_num_in_a(t_ps **a, t_ps **b, t_operations **operations)
 {
     t_ps *n1;
     t_ps *n2;
@@ -107,7 +107,7 @@ void    sort_of_three_numbers_by_ascending_in_a(t_ps **a, t_ps **b, t_operations
         ra(a, b, operations);
 }
 
-void sort_of_four_numbers_by_ascending(t_ps **a, t_ps **b, t_operations **operations)
+void sort_of_four_num(t_ps **a, t_ps **b, t_operations **operations)
 {
     t_ps    *tmp;
     t_ps    *tmp_next;
@@ -128,10 +128,10 @@ void sort_of_four_numbers_by_ascending(t_ps **a, t_ps **b, t_operations **operat
     tmp_next = tmp->next;
     if (tmp->index > tmp_next->index)
         ra(a, b, operations);
-    sort_of_two_numbers_by_ascending(a, b, operations);
+    sort_of_two_num(a, b, operations);
 }
 
-void sort_of_five_numbers_by_ascending(t_ps **a, t_ps **b, t_operations **operations)
+void sort_of_five_num(t_ps **a, t_ps **b, t_operations **operations)
 {
     t_ps    *tmp;
     t_ps    *tmp_next;
@@ -148,6 +148,6 @@ void sort_of_five_numbers_by_ascending(t_ps **a, t_ps **b, t_operations **operat
             ra(a, b, operations);
         tmp = tmp_next;
     }
-    sort_of_three_numbers_by_ascending_in_a(a, b, operations);
-    sort_of_two_numbers_by_ascending(a, b, operations);
+    sort_of_three_num_in_a(a, b, operations);
+    sort_of_two_num(a, b, operations);
 }
