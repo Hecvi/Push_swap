@@ -37,6 +37,8 @@ void     first_check(char **av, int ac)
         write(1, "Add the arguments\n", 18);
         exit(1);
     }
+    if ('-' == av[1][0] && 'w' == av[1][1] && !av[1][2])
+        i++;
     while (av[++i])
     {
         j = 0;
@@ -102,6 +104,8 @@ void    second_check(char **av, t_ps **a, int i, int j)
     int num_of_words;
 
     indicator = &i;
+    if ('-' == av[1][0] && 'w' == av[1][1] && !av[1][2])
+        i++;
     while (av[++i])
     {
         j = 0;

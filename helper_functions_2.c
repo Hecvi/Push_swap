@@ -65,16 +65,6 @@ void    flipping_to_the_top(t_ps **a, t_ps **b, t_operations **operations)
     }
 }
 
-void    the_end_of_sorting(t_ps **a, t_operations **operations)
-{
-    combine(operations, "sa", "sb", "ss");
-    combine(operations, "ra", "rb", "rr");
-    combine(operations, "rra", "rrb", "rrr");
-    print_operations(operations);
-    free_list_operations(operations);
-    free_list(a, 0);
-    exit (0);
-}
 
 void    combine(t_operations **operations, char *str1, char *str2, char *str3)
 {

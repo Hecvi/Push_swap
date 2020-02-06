@@ -12,61 +12,76 @@
 
 #include "push_swap.h"
 
-void    general_sort(t_ps **a, t_ps **b)
+void    general_sort_one(t_ps **a, t_ps **b, char **av)
 {
-    int n;
+    t_ps *tmp;
     int count;
+    int center;
     int numbers;
     t_operations *operations;
 
-    n = 1;
     count = 0;
     operations = NULL;
     numbers = cardinality(a);
+    center = find_mid(a);
     if_we_have_up_to_five_num(a, b, &operations);
     if (check_order_in_stack(a))
         the_end_of_sorting(a, &operations);
     while (++count <= (numbers / 2))
-        sort_first_part(a, b, &operations, numbers / 2);
+        sort_first_part(a, b, &operations, center);
     count = 0;
-    if (!check_elements_in_b(b, numbers / 2))
-        while (++count <= (numbers / 2) && !check_elements_in_b(b, numbers / 2))
-            sort_first_part(a, b, &operations, numbers / 2);
-        block A cделать единичками
+    if (!check_large_elem(a, center))
+        while (++count <= (numbers / 2) && !check_large_elem(a, center))
+            sort_first_part(a, b, &operations, center);
+    tmp = (*a);
+    while (tmp)
+    {
+        tmp->block = 1;
+        tmp = tmp->next;
+    }
+    general_sort_two(a, b, &operations, av);
+}
+
+void    general_sort_two(t_ps **a, t_ps **b, t_operations **operations, char **av)
+{
+    int n;
+
+    n = 1;
     while (!check_order_in_stack(a) || (*b))
     {
         while (*b)
         {
-            while (cardinality(b) > 3)
-                sort_another_parts(a, b, &operations, ++n);
-            check_sort_stack_b_and_a(a, b, &operations);
+            while (cardinality(b) > 2)
+                sort_another_parts(a, b, operations, ++n);
+            check_sort_stack_b_and_a(a, b, operations);
             if ((*a)->block != 1 && !check_order_in_stack(a))
-                transfer_from_a_to_b(a, b, &operations);
+                transfer_from_a_to_b(a, b, operations);
         }
-        if (!check_order_in_stack(a) && (*a)->block)
-        {
-            numbers = cardinality(a);
-            zeroing_the_blocks(a);
-            count = 0;
-            while (++count <= (numbers / 2))
-                sort_first_part(a, b, &operations, find_mid(a));
-            flipping_to_the_top(a, b, &operations);
-        }
+        general_sort_three(a, b, operations);
     }
-    printf("stack A\n");
-    while (*a)
+    the_end_of_sorting(a, operations, av);
+}
+
+void    general_sort_three(t_ps **a, t_ps **b, t_operations **operations)
+{
+    int count;
+    int center;
+    int numbers;
+
+    if (!check_order_in_stack(a) && (*a)->block)
     {
-        printf("%d\n", (*a)->index);
-        (*a) = (*a)->next;
+        count = 0;
+        numbers = cardinality(a);
+        center = find_mid(a);
+        zeroing_the_blocks(a);
+        while (++count <= (numbers / 2 + 1))
+            sort_first_part(a, b, operations, center);
+        count = 0;
+        if (!check_large_elem(a, center))
+            while (++count <= (numbers / 2) && !check_large_elem(a, center))
+                sort_first_part(a, b, operations, center);
+        flipping_to_the_top(a, b, operations);
     }
-    printf("\nstack B\n");
-    while (*b)
-    {
-        printf("%d\n", (*b)->index);
-        (*b) = (*b)->next;
-    }
-    printf("\n");
-    the_end_of_sorting(a, &operations);
 }
 
 void    sort_first_part(t_ps **a, t_ps **b, t_operations **operations, int mid)
@@ -126,116 +141,5 @@ void    sort_another_parts(t_ps **a, t_ps **b, t_operations **operations, int n)
             rb(b, a, operations);
         }
         tmp_b = tmp_next;
-    }
-}
-
-void    check_sort_stack_b_and_a(t_ps **a, t_ps **b, t_operations **operations)
-{
-    if (cardinality(b) >= 1 && cardinality(b) <= 3)
-    {
-        if (3 == cardinality(b))
-            sort_of_three_num_in_b(a, b, operations);
-        else if ((*b)->next && ((*b)->next->index < (*b)->index))
-            sb(b, a, operations);
-        while (*b)
-        {
-            (*b)->sort = 1;
-            pa(b, a, operations);
-            ra(a, b, operations);
-        }
-    }
-    help_with_operations_in_a(a, b, operations);
-    if (cardinality(a) <= 2 && cardinality(a) >= 1)
-    {
-        if (2 == cardinality(a))
-        {
-            if ((*a)->next && ((*a)->next->index < (*a)->index))
-                sa(a, b, operations);
-            (*a)->sort = 1;
-            ra(a, b, operations);
-        }
-        (*a)->sort = 1;
-        ra(a, b, operations);
-    }
-}
-
-void    help_with_operations_in_a(t_ps **a, t_ps **b, t_operations **operations)
-{
-    int min;
-    t_ps *tmp;
-    t_ps *tmp_next;
-
-    tmp = (*a);
-    while (tmp->next)
-        tmp = tmp->next;
-    min = tmp->index;
-    tmp = (*a);
-    while (tmp && tmp->block == (*a)->block)
-    {
-        tmp_next = tmp->next;
-        if (tmp_next && (min + 1) == tmp_next->index && (min + 2) == tmp->index)
-        {
-            sa(a, b, operations);
-            tmp = (*a);
-        }
-        if ((min + 1) == tmp->index)
-        {
-            min++;
-            tmp->sort = 1;
-            ra(a, b, operations);
-            tmp = tmp_next;
-        }
-        else
-            break ;
-    }
-}
-/*
-void    help_with_operations_in_b(t_ps **a, t_ps **b, t_operations **operations)
-{
-    int min;
-    t_ps *tmp;
-    t_ps *tmp_next;
-
-    tmp = (*a);
-    while (tmp->next)
-        tmp = tmp->next;
-    min = tmp->index;
-    if (!(tmp->sort))
-        min = 1;
-    tmp = (*b);
-    while (tmp)
-    {
-        tmp_next = tmp->next;
-        if (tmp_next && min == tmp_next->index && (min + 1) == tmp->index)
-        {
-            sb(b, a, operations);
-            tmp = (*b);
-        }
-        if (min == tmp->index)
-        {
-            min++;
-            tmp->sort = 1;
-            pa(b, a, operations);
-            ra(a, b, operations);
-            tmp = tmp_next;
-        }
-        else
-            break ;
-    }
-}
-*/
-void    transfer_from_a_to_b(t_ps **a, t_ps **b, t_operations **operations)
-{
-    int block;
-    t_ps *tmp;
-    t_ps *tmp_next;
-
-    tmp = (*a);
-    block = (*a)->block;
-    while (tmp && tmp->block == block)
-    {
-        tmp_next = tmp->next;
-        pb(a, b, operations);
-        tmp = tmp_next;
     }
 }
