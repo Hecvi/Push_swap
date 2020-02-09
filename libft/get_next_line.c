@@ -94,8 +94,6 @@ int		get_next_line(const int fd, char **line)
 		tail[fd] = ft_strnew(0);
 	else if (line_in_tail(&tail[fd], line))
 		return (1);
-	*line = ft_strdup(tail[fd]);
-	free(tail[fd]);
-	tail[fd] = NULL;
+	*line = tail[fd];
 	return (read_buffer(line, &tail[fd], fd));
 }

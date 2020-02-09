@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: klaurine <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: klaurine <klaurine@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/16 20:19:56 by klaurine          #+#    #+#              #
-#    Updated: 2019/08/31 19:28:40 by klaurine         ###   ########.fr        #
+#    Updated: 2020/02/09 15:49:58 by klaurine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ HEADERS = ./libft.h
 
 all: $(NAME)
 
-$(NAME):
+$(NAME): $(SOURCE)
 	gcc -c $(SOURCE) -I $(HEADERS) -Wall -Wextra -Werror
 	ar -rv $(NAME) $(OBJECTS)
 	ranlib $(NAME)

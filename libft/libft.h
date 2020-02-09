@@ -13,7 +13,7 @@
 #ifndef LIBFT_H
 # define LIBFT_H
 # define FD_MAX 4864
-# define BUFF_SIZE 9999
+# define BUFF_SIZE 1500
 # define ATOI_MAX 9223372036854775807
 # include <string.h>
 # include <stdlib.h>
