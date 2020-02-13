@@ -6,7 +6,7 @@
 /*   By: klaurine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 18:31:23 by klaurine          #+#    #+#             */
-/*   Updated: 2020/02/08 16:16:53 by klaurine         ###   ########.fr       */
+/*   Updated: 2020/02/13 17:07:26 by klaurine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,19 @@ void	pb(t_ps **a, t_ps **b, t_operations **operations)
 
 	if (*a)
 	{
-        if (NULL == (*b))
-        {
-            (*b) = (*a);
-            (*a) = (*a)->next;
-            (*b)->next = NULL;
-        }
-        else
-        {
-            l = (*a)->next;
-            (*a)->next = (*b);
-            (*b) = (*a);
-            (*a) = l;
-        }
+		if (NULL == (*b))
+		{
+			(*b) = (*a);
+			(*a) = (*a)->next;
+			(*b)->next = NULL;
+		}
+		else
+		{
+			l = (*a)->next;
+			(*a)->next = (*b);
+			(*b) = (*a);
+			(*a) = l;
+		}
 		create_list_oper(operations, a, b, "pb");
 	}
 }
@@ -87,10 +87,21 @@ void	rrb(t_ps **b, t_ps **a, t_operations **operations)
 
 void	ss(t_ps **a, t_ps **b, t_operations **operations)
 {
-	if ((*a) && (*a)->next && (*b) && (*b)->next)
+	t_ps *l;
+
+	if ((*b) && (*b)->next)
 	{
-		sa(a, b, operations);
-		sb(b, a, operations);
-		create_list_oper(operations, a, b, "ss");
+		l = (*b)->next;
+		(*b)->next = l->next;
+		l->next = (*b);
+		(*b) = l;
 	}
+	if ((*a) && (*a)->next)
+	{
+		l = (*a)->next;
+		(*a)->next = l->next;
+		l->next = (*a);
+		(*a) = l;
+	}
+	create_list_oper(operations, a, b, "ss");
 }

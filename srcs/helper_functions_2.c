@@ -6,7 +6,7 @@
 /*   By: klaurine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 18:31:23 by klaurine          #+#    #+#             */
-/*   Updated: 2020/02/09 18:38:00 by klaurine         ###   ########.fr       */
+/*   Updated: 2020/02/13 16:57:40 by klaurine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,21 @@ void	zeroing_the_blocks(t_ps **a)
 
 void	flipping_to_the_top(t_ps **a, t_ps **b, t_operations **operations)
 {
+	int		min;
 	t_ps	*tmp;
 	t_ps	*tmp_next;
 
 	tmp = (*a);
+	min = find_min(b);
 	while (tmp && tmp->sort == 1)
 		tmp = tmp->next;
 	while (tmp && tmp->sort != 1 && tmp != (*a))
 	{
 		tmp_next = tmp;
-		rra(a, b, operations);
+		if ((*b)->index != min && (*b))
+			rrr(a, b, operations);
+		else
+			rra(a, b, operations);
 		tmp = tmp_next;
 	}
 }

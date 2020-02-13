@@ -6,7 +6,7 @@
 /*   By: klaurine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 18:31:23 by klaurine          #+#    #+#             */
-/*   Updated: 2020/02/08 16:12:38 by klaurine         ###   ########.fr       */
+/*   Updated: 2020/02/13 17:05:57 by klaurine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	check_list_a(t_ps **a)
 	}
 	if (1 == flag)
 		return ;
-	write(1, "Incorrect data\n", 15);
+	write(1, "Error: Incorrect data\n", 22);
 	exit(1);
 }
 
@@ -83,7 +83,7 @@ void	create_list_a(t_ps **a, int i, char **s, int words)
 	{
 		if (!((*a) = (t_ps *)malloc(sizeof(t_ps))))
 		{
-			write(1, "Memory allocation error\n", 24);
+			write(1, "Error: Memory allocation error\n", 31);
 			free_split(s, words, 0);
 			exit(1);
 		}
@@ -105,7 +105,7 @@ void	create_list_oper(t_operations **operations, t_ps **a, t_ps **b, char *s)
 	if (NULL == (*operations))
 	{
 		if (!((*operations) = (t_operations *)malloc(sizeof(t_operations))))
-		    one_more_small_func(a);
+			one_more_small_func(a);
 		(*operations)->str = s;
 		(*operations)->next = NULL;
 		return ;

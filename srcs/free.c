@@ -24,7 +24,7 @@ void	free_split(char **s, int words, int flag)
 	free(s);
 	s = NULL;
 	if (1 == flag)
-		write(1, "Memory allocation error\n", 24);
+		write(1, "Error: Memory allocation error\n", 31);
 }
 
 void	free_all(char **s, int words, t_ps **a, int flag)
@@ -34,7 +34,7 @@ void	free_all(char **s, int words, t_ps **a, int flag)
 	else
 	{
 		free_split(s, words, 0);
-		write(1, "Incorrect data\n", 15);
+		write(1, "Error: Incorrect data\n", 22);
 	}
 	free_list(a, 0);
 	exit(1);
@@ -52,7 +52,7 @@ void	free_list(t_ps **stack, int flag)
 		tmp = (*stack);
 	}
 	if (1 == flag)
-		write(1, "Memory allocation error\n", 24);
+		write(1, "Error: Memory allocation error\n", 31);
 }
 
 void	free_list_operations(t_operations **operations)

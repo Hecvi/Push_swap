@@ -35,7 +35,7 @@ void	first_check(char **av, int ac)
 	i = 0;
 	if (1 == ac || (2 == ac && '-' == av[1][0] && 'w' == av[1][1] && !av[1][2]))
 	{
-		write(1, "Add the arguments\n", 18);
+		write(1, "Error: Add the arguments\n", 25);
 		exit(1);
 	}
 	if ('-' == av[1][0] && 'w' == av[1][1] && !av[1][2])
@@ -49,16 +49,15 @@ void	first_check(char **av, int ac)
 				j++;
 			else
 			{
-				write(1, "Incorrect data\n", 15);
+				write(1, "Error: Incorrect data\n", 22);
 				exit(1);
 			}
 		}
 	}
 }
 
-int		check_string_of_array(char *s, int *indicator)
+int		check_string_of_array(char *s, int *indicator, int i)
 {
-	int		i;
 	size_t	j;
 	int		sign;
 	int		number;
@@ -78,7 +77,10 @@ int		check_string_of_array(char *s, int *indicator)
 	}
 	while (s[++i])
 		if (!(s[i] >= '0' && s[i] <= '9'))
+		{
+			*indicator = -1;
 			return (0);
+		}
 	number = func_atoi(s, sign, indicator);
 	return (number);
 }
@@ -115,7 +117,7 @@ void	second_check(char **av, t_ps **a, int i, int j)
 		num_of_words = c_w(av[i]);
 		while (s[j])
 		{
-			number = check_string_of_array(s[j], indicator);
+			number = check_string_of_array(s[j], indicator, i);
 			if (-1 == *indicator || !(check_number(a, number)))
 				free_all(s, num_of_words, a, 0);
 			create_list_a(a, number, s, num_of_words);

@@ -8,10 +8,10 @@ LIBFT_A = libft/libft.a
 OBJ_DIR = obj/
 PS_SRCS = push_swap.c check_data.c ft_split.c list.c free.c operations_one.c \
 operations_two.c helper_functions.c helper_functions_2.c helper_functions_3.c \
-helper_functions_4.c sort_usual.c sort.c
+helper_functions_4.c helper_functions_5.c sort_usual.c sort.c
 CHECKER_SRCS = checker.c check_data.c ft_split.c list.c free.c operations_one.c \
 operations_two.c helper_functions.c helper_functions_2.c helper_functions_3.c \
-helper_functions_4.c sort_usual.c sort.c
+helper_functions_4.c helper_functions_5.c sort_usual.c sort.c
 
 CHECKER_OBJ = ${CHECKER_SRCS:c=o}
 PS_OBJ = ${PS_SRCS:c=o}

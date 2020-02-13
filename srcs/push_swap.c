@@ -6,7 +6,7 @@
 /*   By: klaurine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 18:31:23 by klaurine          #+#    #+#             */
-/*   Updated: 2020/02/08 16:19:54 by klaurine         ###   ########.fr       */
+/*   Updated: 2020/02/13 17:07:51 by klaurine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,5 @@ int		main(int ac, char **av)
 	second_check(av, &a, i, j);
 	sort_by_index(&a, count);
 	general_sort_one(&a, &b, av);
-
 	return (0);
 }

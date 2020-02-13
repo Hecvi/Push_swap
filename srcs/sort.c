@@ -6,7 +6,7 @@
 /*   By: klaurine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 18:31:23 by klaurine          #+#    #+#             */
-/*   Updated: 2020/02/08 16:49:34 by klaurine         ###   ########.fr       */
+/*   Updated: 2020/02/13 17:12:39 by klaurine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	general_sort_one(t_ps **a, t_ps **b, char **av)
 {
-	t_ps			*tmp;
 	int				count;
 	int				center;
 	int				numbers;
@@ -31,7 +30,7 @@ void	general_sort_one(t_ps **a, t_ps **b, char **av)
 		sort_first_part(a, b, &operations, center);
 	count = 0;
 	if (!check_large_elem(a, center))
-		while (++count <= (numbers / 2) && !check_large_elem(a, center))
+		while (++count <= (numbers / 2 + 1) && !check_large_elem(a, center))
 			sort_first_part(a, b, &operations, center);
 	gen_sort_two(a, b, &operations, av);
 }
@@ -93,7 +92,7 @@ void	sort_first_part(t_ps **a, t_ps **b, t_operations **operations, int mid)
 	if (tmp_a && tmp_a->sort != 1)
 	{
 		if (tmp_a->index <= mid)
-		    pb(a, b, operations);
+			pb(a, b, operations);
 		else if (0 == (*a)->block)
 		{
 			(*a)->block = 1;

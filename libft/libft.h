@@ -6,7 +6,7 @@
 /*   By: klaurine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/22 13:39:53 by klaurine          #+#    #+#             */
-/*   Updated: 2019/10/07 17:03:06 by klaurine         ###   ########.fr       */
+/*   Updated: 2020/02/13 16:40:16 by klaurine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,6 @@ unsigned char		ft_swap_bits(unsigned char octet);
 unsigned char		ft_reverse_bits(unsigned char octet);
 void				ft_print_bits(unsigned char octet);
 char				*ft_strndup(const char *s1, size_t n);
-int                 get_next_line(const int fd, char **line);
+int					get_next_line(const int fd, char **line);
 
 #endif

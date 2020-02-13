@@ -6,7 +6,7 @@
 /*   By: klaurine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 18:40:20 by klaurine          #+#    #+#             */
-/*   Updated: 2020/02/09 15:15:43 by klaurine         ###   ########.fr       */
+/*   Updated: 2020/02/13 16:39:09 by klaurine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ int							write_to_file(t_operations **operations);
 void						free_split(char **s, int words, int flag);
 int							open_file(t_ps **a, t_operations **operations);
 int							func_atoi(char *str, int sign, int *indicator);
-int							check_string_of_array(char *s, int *indicator);
 void						second_check(char **av, t_ps **a, int i, int j);
 void						free_list_operations(t_operations **operations);
 void						general_sort_one(t_ps **a, t_ps **b, char **av);
@@ -73,16 +72,14 @@ void						rb(t_ps **b, t_ps **a, t_operations **operations);
 void						rra(t_ps **a, t_ps **b, t_operations **operations);
 void						rrb(t_ps **b, t_ps **a, t_operations **operations);
 void						rrr(t_ps **a, t_ps **b, t_operations **operations);
+int							check_string_of_array(char *s, int *indicator,
+		int i);
 char						**mas_of_char(char *str, char **s, t_ps **a,
 		int i);
-int                         compare(t_operations **operations, char *str1,
-        char *str2, t_ps **list);
-void                        combine_pb_pa(t_operations **operations, char *str1,
-                                          char *str2);
 void						create_list_a(t_ps **a, int i, char **s,
 		int words);
-void                        combine_pb_pa(t_operations **operations, char *str1,
-        char *str2);
+void						combine_pb_pa(t_operations **operations,
+		char *str1, char *str2, int f);
 void						print_operations(t_operations **operations,
 		char **av);
 void						filling_in_lists(t_ps **a, int i, char **s,
@@ -97,8 +94,8 @@ void						sort_of_four_num(t_ps **a, t_ps **b,
 		t_operations **operations);
 void						general_sort_three(t_ps **a, t_ps **b,
 		t_operations **operations);
-int                         compare_tmp(char *str1,
-        char *str2, t_operations *list);
+int							compare_tmp(char *str1, char *str2,
+		t_operations *list);
 void						five_num(t_ps **a, t_ps **b,
 		t_operations **operations, char **av);
 int							fuc_norm(t_ps **a, t_ps **b,

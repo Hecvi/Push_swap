@@ -6,7 +6,7 @@
 /*   By: klaurine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 18:31:23 by klaurine          #+#    #+#             */
-/*   Updated: 2020/02/08 16:15:32 by klaurine         ###   ########.fr       */
+/*   Updated: 2020/02/13 17:06:41 by klaurine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,30 @@ void	ra(t_ps **a, t_ps **b, t_operations **operations)
 
 void	rr(t_ps **a, t_ps **b, t_operations **operations)
 {
-	if ((*a) && (*a)->next && (*b) && (*b)->next)
+	t_ps *l;
+	t_ps *tmp;
+
+	if ((*b) && (*b)->next)
 	{
-		ra(a, b, operations);
-		rb(b, a, operations);
-		create_list_oper(operations, a, b, "rr");
+		l = (*b);
+		tmp = (*b)->next;
+		while (l->next)
+			l = l->next;
+		l->next = (*b);
+		(*b)->next = NULL;
+		(*b) = tmp;
 	}
+	if ((*a) && (*a)->next)
+	{
+		l = (*a);
+		tmp = (*a)->next;
+		while (l->next)
+			l = l->next;
+		l->next = (*a);
+		(*a)->next = NULL;
+		(*a) = tmp;
+	}
+	create_list_oper(operations, a, b, "rr");
 }
 
 void	rra(t_ps **a, t_ps **b, t_operations **operations)
