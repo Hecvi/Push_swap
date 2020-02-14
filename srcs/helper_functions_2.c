@@ -34,6 +34,8 @@ int		func_atoi(char *str, int sign, int *indicator)
 		}
 		i++;
 	}
+	if (('+' == str[0] || '-' == str[0]) && '\0' == str[1])
+        *indicator = -1;
 	return ((int)number * sign);
 }
 
